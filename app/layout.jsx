@@ -2,7 +2,7 @@ import { ibmPlexSans, ibmPlexMono } from "../lib/fonts";
 import { siteConfig } from "../lib/siteConfig";
 import SiteChrome from "../components/layout/SiteChrome";
 import WhatsAppFab from "../components/layout/WhatsAppFab";
-import ContactSection from "../components/layout/ContactSection";
+import ConditionalContactSection from "../components/layout/ConditionalContactSection";
 import "./globals.css";
 
 // Site-wide defaults. Every page can override title/description via its own
@@ -54,7 +54,11 @@ const organizationJsonLd = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${ibmPlexSans.variable} ${ibmPlexMono.variable}`}>
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      className={`${ibmPlexSans.variable} ${ibmPlexMono.variable}`}
+    >
       <body>
         {/* JSON-LD: helps search engines understand the business entity,
             independent of what's rendered visually on any given page. */}
@@ -71,7 +75,7 @@ export default function RootLayout({ children }) {
 
         <main id="main">
           {children}
-          <ContactSection />
+          <ConditionalContactSection />
         </main>
 
         <WhatsAppFab />

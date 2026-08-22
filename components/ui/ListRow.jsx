@@ -22,12 +22,22 @@ const ExternalIcon = () => (
  *  - description   optional
  *  - href          internal Next.js route (renders <Link>)
  *  - externalHref  external URL (renders <a target="_blank"> with the external icon)
+ *  - mailHref      mailto:/tel: action link (renders a plain <a>, no target/rel,
+ *                   used for things like Career's "Apply Now" rows)
  *  - showArrow     defaults to true
  *
- * If neither href nor externalHref is given, renders a static <div class="row">
- * (used for job listings with a mailto action baked into the row itself, etc.)
+ * If none of href / externalHref / mailHref is given, renders a static
+ * <div class="row"> (used for plain info rows with no action).
  */
-export default function ListRow({ tag, title, description, href, externalHref, showArrow = true }) {
+export default function ListRow({
+  tag,
+  title,
+  description,
+  href,
+  externalHref,
+  mailHref,
+  showArrow = true,
+}) {
   const content = (
     <>
       <span className="tag">{tag}</span>
@@ -38,6 +48,10 @@ export default function ListRow({ tag, title, description, href, externalHref, s
       {showArrow && <span className="go">{externalHref ? <ExternalIcon /> : <ArrowIcon />}</span>}
     </>
   );
+
+  if (mailHref) {
+    return <a href={mailHref}>{content}</a>;
+  }
 
   if (externalHref) {
     return (

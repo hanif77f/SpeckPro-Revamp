@@ -31,7 +31,7 @@ const heroPills = [
 export default function IotSolutionsPage() {
   return (
     <>
-      <AnimVariant name="anim-wipe" />
+      {/* <AnimVariant name="anim-wipe" /> */}
       <ChapterRail items={railItems} />
 
       <PageHeroSub
