@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef, useState } from "react";
 import Link from "next/link";
 import { services, primaryNav } from "../../lib/nav";
 
@@ -9,7 +10,27 @@ const ChevronIcon = () => (
   </svg>
 );
 
+// Small grace period before closing, so quickly moving the mouse from the
+// trigger down into the menu (or briefly grazing the gap between them)
+// doesn't close it — but genuinely moving away always closes it shortly
+// after. Using real open/close state (instead of pure CSS :hover) avoids
+// the menu staying open just because its box happens to visually overlap
+// a neighboring nav link.
+const CLOSE_DELAY = 150;
+
 export default function Header({ stuck, onBurgerClick, overlayOpen }) {
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const closeTimer = useRef(null);
+
+  function openServices() {
+    clearTimeout(closeTimer.current);
+    setServicesOpen(true);
+  }
+  function closeServicesSoon() {
+    clearTimeout(closeTimer.current);
+    closeTimer.current = setTimeout(() => setServicesOpen(false), CLOSE_DELAY);
+  }
+
   return (
     <header className={`c-hd${stuck ? " stuck" : ""}`}>
       <div className="c-hd__in">
@@ -31,18 +52,30 @@ export default function Header({ stuck, onBurgerClick, overlayOpen }) {
         </Link>
 
         <nav className="c-hnav">
-          {/* Services leads the nav now (button-trigger dropdown, keyboard
-              accessible via :focus-within — see globals.css for why this
-              replaced the old link-trigger .has-drop/.drop pattern). */}
-          <div className="c-hnav__drop">
-            <button className="c-hnav__trig" type="button" aria-haspopup="true">
+          {/* Services leads the nav now (button-trigger dropdown). Open
+              state is JS-controlled (see openServices/closeServicesSoon
+              above) rather than pure CSS :hover, so it closes reliably
+              once the mouse truly leaves — :focus-within stays as a
+              keyboard-only fallback for Tab navigation. */}
+          <div
+            className={`c-hnav__drop${servicesOpen ? " open" : ""}`}
+            onMouseEnter={openServices}
+            onMouseLeave={closeServicesSoon}
+          >
+            <button
+              className="c-hnav__trig"
+              type="button"
+              aria-haspopup="true"
+              aria-expanded={servicesOpen}
+              onFocus={openServices}
+            >
               Services
               <ChevronIcon />
             </button>
             <div className="c-hnav__menu">
               <div className="c-hnav__menu-inner">
                 {services.map((s) => (
-                  <Link key={s.href} href={s.href}>
+                  <Link key={s.href} href={s.href} onBlur={closeServicesSoon}>
                     {s.label}
                   </Link>
                 ))}

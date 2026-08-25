@@ -126,32 +126,52 @@ p{margin:0;}
 
 /* ---------- header nav: button-trigger dropdown (new pattern) ----------
    Same visual result as .has-drop/.drop above, but triggered by a real
-   <button> (better for keyboard/AT users: :focus-within keeps it open
-   on Tab too, not just mouse hover) instead of the first link itself
-   being the trigger. Structured as an invisible padding-based "bridge"
-   (.c-hnav__menu) wrapping a visually-styled inner panel
-   (.c-hnav__menu-inner), for the same reason .drop/.drop-inner were
-   split earlier: a pure margin-top gap between trigger and menu breaks
-   :hover the instant the cursor crosses it, because margin is not part
-   of any element's hit-testable box. Padding is — so the "bridge" stays
-   continuously hoverable all the way from the button down into the menu. */
+   <button>. Visibility is driven by the JS-controlled .open class (see
+   Header.jsx: openServices/closeServicesSoon with a short close delay)
+   rather than pure CSS :hover — a pure-hover version keeps the menu
+   "open" for as long as the cursor sits anywhere within its rendered
+   box, and since this menu (236px) is wider than its trigger and can
+   visually overlap the neighboring "About" link, that made it get stuck
+   open when moving toward other nav items. JS state with a short delay
+   closes it reliably once the mouse actually leaves, while still being
+   forgiving enough that crossing the small visual gap between trigger
+   and menu doesn't close it prematurely — so no need for the wide
+   invisible "bridge" hitbox that caused the overlap in the first place.
+
+   :has(:focus-visible) stays on as a keyboard-only fallback (Tab nav
+   specifically — unlike :focus-within, it deliberately does NOT match
+   focus caused by a mouse click, which is what caused the dropdown to
+   "open and close on click" before that fix).
+
+   IMPORTANT: the .open rules and the :has() rules below are kept as
+   fully SEPARATE rules rather than combined into one comma-separated
+   selector. If they were combined and a browser doesn't recognize
+   :has(), older (non-"forgiving list") selector parsing can drop the
+   ENTIRE rule — including the unrelated .open half — breaking the
+   JS-driven hover behavior along with the keyboard fallback. Keeping
+   them fully independent means :has() support (or lack of it) can
+   never affect the primary hover/JS behavior at all. */
 .c-hnav__drop{position:relative;}
 
 .c-hnav__trig{display:flex; align-items:center; gap:6px; background:none; border:0; color:#EAF3F5; opacity:.72; font:inherit; letter-spacing:inherit; text-transform:inherit; padding-block:20px; cursor:pointer; transition:opacity .35s var(--e);}
 
 .c-hnav__trig svg{width:10px; height:10px; flex-shrink:0; transition:transform .3s var(--e);}
 
-.c-hnav__drop:hover .c-hnav__trig, .c-hnav__drop:focus-within .c-hnav__trig{opacity:1;}
+.c-hnav__drop.open .c-hnav__trig{opacity:1;}
+.c-hnav__drop:has(:focus-visible) .c-hnav__trig{opacity:1;}
 
-.c-hnav__drop:hover .c-hnav__trig svg, .c-hnav__drop:focus-within .c-hnav__trig svg{transform:rotate(180deg);}
+.c-hnav__drop.open .c-hnav__trig svg{transform:rotate(180deg);}
+.c-hnav__drop:has(:focus-visible) .c-hnav__trig svg{transform:rotate(180deg);}
 
-.c-hnav__menu{position:absolute; top:100%; left:50%; min-width:236px; transform:translateX(-50%); padding-top:16px; opacity:0; visibility:hidden; pointer-events:none; transition:opacity .3s var(--e), visibility 0s linear .3s; text-transform:none; letter-spacing:normal;}
+.c-hnav__menu{position:absolute; top:100%; left:50%; min-width:236px; transform:translateX(-50%); padding-top:6px; opacity:0; visibility:hidden; pointer-events:none; transition:opacity .3s var(--e), visibility 0s linear .3s; text-transform:none; letter-spacing:normal;}
 
-.c-hnav__drop:hover .c-hnav__menu, .c-hnav__drop:focus-within .c-hnav__menu{opacity:1; visibility:visible; pointer-events:auto; transition:opacity .3s var(--e);}
+.c-hnav__drop.open .c-hnav__menu{opacity:1; visibility:visible; pointer-events:auto; transition:opacity .3s var(--e);}
+.c-hnav__drop:has(:focus-visible) .c-hnav__menu{opacity:1; visibility:visible; pointer-events:auto; transition:opacity .3s var(--e);}
 
 .c-hnav__menu-inner{background:rgba(7,11,15,.94); backdrop-filter:blur(18px) saturate(1.4); border:1px solid rgba(234,243,245,.14); border-radius:16px; padding:8px; transform:translateY(8px); transition:transform .3s var(--e);}
 
-.c-hnav__drop:hover .c-hnav__menu-inner, .c-hnav__drop:focus-within .c-hnav__menu-inner{transform:translateY(0);}
+.c-hnav__drop.open .c-hnav__menu-inner{transform:translateY(0);}
+.c-hnav__drop:has(:focus-visible) .c-hnav__menu-inner{transform:translateY(0);}
 
 .c-hnav__menu a{display:block; padding:10px 14px; border-radius:10px; font-family:var(--body); font-size:13.5px; font-weight:500; letter-spacing:normal; text-transform:none; color:#EAF3F5; opacity:.8; transition:all .25s var(--e);}
 
@@ -469,7 +489,7 @@ input[type=range]{width:100%; height:34px; accent-color:var(--ct); cursor:pointe
 @media (max-width:600px){
   .c-open{padding:126px 0 64px;}
   .c-open--sub{padding:120px 0 56px;}
-  /* .c-hd{top:14px;} */
+  .c-hd{top:14px;}
   .c-hd__in{height:62px;}
 }
 
