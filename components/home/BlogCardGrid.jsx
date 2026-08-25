@@ -18,12 +18,7 @@ export default function BlogCardGrid() {
         />
 
         <Reveal as="div" className="c-blog__grid" index={3}>
-          <a
-            className="c-blog__card"
-            href="https://speckpro.com/dot-chaser-classic-arcade-game/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a className="c-blog__card" href="/blog">
             <div className="c-blog__thumb">
               <svg viewBox="0 0 300 188" preserveAspectRatio="xMidYMid slice">
                 <rect width="300" height="188" fill="#0A0E1A" />
@@ -43,22 +38,17 @@ export default function BlogCardGrid() {
               </svg>
             </div>
             <div className="c-blog__body">
-              <span className="c-blog__tag">Jul 20, 2026</span>
+              <span className="c-blog__tag">Coming Soon</span>
               <h4>Dot Chaser – Classic Arcade Fun</h4>
               <p>A retro arcade game experience on Fire Tablets and TV.</p>
               <span className="c-blog__more">
-                Read the post
+                Coming soon
                 <ArrowIcon />
               </span>
             </div>
           </a>
 
-          <a
-            className="c-blog__card"
-            href="https://speckpro.com/https-speckpro-com-permit-hub-app-permission-manager/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a className="c-blog__card" href="/blog">
             <div className="c-blog__thumb">
               <svg viewBox="0 0 300 188" preserveAspectRatio="xMidYMid slice">
                 <rect width="300" height="188" fill="#0A0E1A" />
@@ -77,11 +67,11 @@ export default function BlogCardGrid() {
               </svg>
             </div>
             <div className="c-blog__body">
-              <span className="c-blog__tag">Jul 19, 2026</span>
+              <span className="c-blog__tag">Coming Soon</span>
               <h4>Permit Hub App</h4>
               <p>Take control of your app permissions and protect your digital privacy.</p>
               <span className="c-blog__more">
-                Read the post
+                Coming soon
                 <ArrowIcon />
               </span>
             </div>
@@ -108,11 +98,11 @@ export default function BlogCardGrid() {
               </svg>
             </div>
             <div className="c-blog__body">
-              <span className="c-blog__tag">Archive</span>
-              <h4>Read the full journal</h4>
-              <p>More on web design, app development, and digital marketing.</p>
+              <span className="c-blog__tag">Coming Soon</span>
+              <h4>More stories on the way</h4>
+              <p>We&rsquo;re building out the full journal — check back after launch.</p>
               <span className="c-blog__more">
-                Browse all posts
+                Visit the blog
                 <ArrowIcon />
               </span>
             </div>
