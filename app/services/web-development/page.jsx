@@ -8,10 +8,14 @@ import ApproachSection from "../../../components/services/ApproachSection";
 import ExploreMore from "../../../components/services/ExploreMore";
 
 export const metadata = {
-  title: "Web Design & Development",
+  title: {
+    absolute: "Web Design & Development Services",
+  },
   description:
-    "Custom web application development, WordPress and Shopify e-commerce, and responsive website design from SpeckPro Digital.",
-  alternates: { canonical: "/services/web-development" },
+    "Custom web application development, WordPress and Shopify e-commerce, and responsive website design built to convert visitors into customers.",
+  alternates: {
+    canonical: "/services/web-development",
+  },
 };
 
 const railItems = [

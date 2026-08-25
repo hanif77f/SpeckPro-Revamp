@@ -7,12 +7,15 @@ import ListRow from "../../components/ui/ListRow";
 import Reveal from "../../components/ui/Reveal";
 
 export const metadata = {
-  title: "About",
+  title: {
+    absolute: "About Us – Custom Software Development Company",
+  },
   description:
-    "SpeckPro Digital — a global IT solutions company delivering ERP systems, mobile apps, web design, UI/UX, digital marketing, and IoT-powered business applications.",
-  alternates: { canonical: "/about" },
+    "SpeckPro Digital delivers websites, mobile apps, AI solutions, and custom software development for clients worldwide, from offices in Pakistan and the UK.",
+  alternates: {
+    canonical: "/about",
+  },
 };
-
 const railItems = [
   { id: "top", label: "Open" },
   { id: "ch-mission", label: "Mission" },

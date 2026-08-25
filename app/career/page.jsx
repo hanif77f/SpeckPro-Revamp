@@ -8,10 +8,14 @@ import JobsFilter from "../../components/career/JobsFilter";
 import { siteConfig } from "../../lib/siteConfig";
 
 export const metadata = {
-  title: "Career",
+  title: {
+    absolute: "Careers – Join Our Team",
+  },
   description:
-    "Open roles at SpeckPro Digital across our Pakistan and UK offices — engineering, design, marketing, and internships.",
-  alternates: { canonical: "/career" },
+    "Explore open roles at SpeckPro Digital across our Pakistan and UK offices — engineering, design, marketing, and internship positions.",
+  alternates: {
+    canonical: "/career",
+  },
 };
 
 const railItems = [

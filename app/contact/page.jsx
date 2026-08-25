@@ -6,8 +6,11 @@ import { siteConfig } from "../../lib/siteConfig";
 
 export const metadata = {
   title: "Contact Us",
-  description: "Get in touch with SpeckPro Digital — offices in Islamabad, Pakistan and Bolton, UK.",
-  alternates: { canonical: "/contact" },
+  description:
+    "Get in touch with SpeckPro Digital — offices in Pakistan and the UK. Describe your project and our team will reach out.",
+  alternates: {
+    canonical: "/contact",
+  },
 };
 
 const railItems = [

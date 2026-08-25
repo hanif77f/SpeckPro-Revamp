@@ -8,10 +8,14 @@ import ApproachSection from "../../../components/services/ApproachSection";
 import ExploreMore from "../../../components/services/ExploreMore";
 
 export const metadata = {
-  title: "Digital Transformation",
+  title: {
+    absolute: "Digital Transformation & ERP Systems",
+  },
   description:
-    "Scalable ERP-powered digital transformation from SpeckPro Digital — HR, finance, CRM, and inventory systems built around your business.",
-  alternates: { canonical: "/services/digital-transformation" },
+    "Scalable ERP-powered digital transformation from SpeckPro Digital — HR, finance, CRM, and inventory systems configured around your business.",
+  alternates: {
+    canonical: "/services/digital-transformation",
+  },
 };
 
 const railItems = [

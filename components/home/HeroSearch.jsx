@@ -1,18 +1,15 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Reveal from "../ui/Reveal";
 
 export default function HeroSearch() {
-  const router = useRouter();
-
   return (
     <Reveal as="div" className="c-find" index={3}>
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          router.push("/contact");
+          window.location.hash = "ch-estimate";
         }}
       >
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">

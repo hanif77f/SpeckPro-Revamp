@@ -8,10 +8,14 @@ import ApproachSection from "../../../components/services/ApproachSection";
 import ExploreMore from "../../../components/services/ExploreMore";
 
 export const metadata = {
-  title: "IoT Solutions",
+  title: {
+    absolute: "IoT Solutions & Smart Device Development",
+  },
   description:
-    "Customized IoT business applications and smart device solutions from SpeckPro Digital, backed by rapid proof of concept.",
-  alternates: { canonical: "/services/iot-solutions" },
+    "Customized IoT business applications and smart device solutions from SpeckPro Digital, validated fast with a rapid proof of concept.",
+  alternates: {
+    canonical: "/services/iot-solutions",
+  },
 };
 
 const railItems = [

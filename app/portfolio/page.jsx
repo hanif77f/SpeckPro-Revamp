@@ -6,10 +6,14 @@ import HairlineList from "../../components/ui/HairlineList";
 import ListRow from "../../components/ui/ListRow";
 
 export const metadata = {
-  title: "Portfolio",
+  title: {
+    absolute: "Our Portfolio & Client Projects",
+  },
   description:
-    "Products, platforms, and websites SpeckPro Digital has helped build — e-commerce, publishing, sports, education, and NGO platforms.",
-  alternates: { canonical: "/portfolio" },
+    "See websites, mobile apps, and custom software SpeckPro Digital has delivered for clients across e-commerce, publishing, and other industries.",
+  alternates: {
+    canonical: "/portfolio",
+  },
 };
 
 const railItems = [

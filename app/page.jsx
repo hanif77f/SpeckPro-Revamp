@@ -4,27 +4,35 @@ import Blooms from "../components/ui/Blooms";
 import OrbitalRing from "../components/ui/OrbitalRing";
 import Reveal from "../components/ui/Reveal";
 import SectionHead from "../components/ui/SectionHead";
-import HairlineList from "../components/ui/HairlineList";
-import ListRow from "../components/ui/ListRow";
 import HeroSearch from "../components/home/HeroSearch";
 import ProofPanel from "../components/home/ProofPanel";
 import ServicesExplorer from "../components/home/ServicesExplorer";
-import ScopeEstimator from "../components/home/ScopeEstimator";
+import WhySpeckPro from "../components/home/WhySpeckPro";
+import ProjectStarterWizard from "../components/home/ProjectStarterWizard";
+import CaseStudyCarousel from "../components/home/CaseStudyCarousel";
+import BlogCardGrid from "../components/home/BlogCardGrid";
+import WaveCTA from "../components/home/WaveCTA";
 import { ringPresets } from "../lib/ringPresets";
 
 export const metadata = {
-  title: "Home",
+  title: {
+    absolute: "Website, Mobile App & AI Software Development",
+  },
   description:
-    "SpeckPro is a global IT solutions company building mobile apps, websites, and IoT-powered platforms with agile precision.",
-  alternates: { canonical: "/" },
+    "SpeckPro Digital builds websites, mobile apps, AI solutions, and custom software with agile precision. Offices in Pakistan and the UK.",
+  alternates: {
+    canonical: "/",
+  },
 };
 
 const railItems = [
   { id: "top", label: "Open" },
+  { id: "ch-why", label: "Why Us" },
   { id: "ch-services", label: "Services" },
-  { id: "ch-estimate", label: "Estimate" },
+  { id: "ch-estimate", label: "Start" },
   { id: "ch-work", label: "Work" },
   { id: "ch-journal", label: "Journal" },
+  { id: "ch-cta", label: "Next Step" },
   { id: "ch-contact", label: "Contact" },
 ];
 
@@ -57,6 +65,9 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ============ 01.5 · WHY SPECKPRO ============ */}
+      <WhySpeckPro />
+
       {/* ============ 02 · SERVICES ============ */}
       <section className="c-sec" id="ch-services">
         <div className="c-w">
@@ -71,90 +82,45 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ============ 03 · SCOPE ESTIMATOR ============ */}
+      {/* ============ 03 · PROJECT STARTER ============ */}
       <section className="c-calc c-void" id="ch-estimate">
-        <Blooms />
+        <div className="c-atm">
+          <span
+            className="c-bloom"
+            style={{
+              width: "42vw",
+              height: "42vw",
+              top: "-10vw",
+              right: "-8vw",
+              background: "radial-gradient(circle,#7A5A22,transparent 68%)",
+            }}
+          />
+          <span
+            className="c-bloom"
+            style={{
+              width: "38vw",
+              height: "38vw",
+              bottom: "-14vw",
+              left: "-8vw",
+              background: "radial-gradient(circle,#0E8F79,transparent 70%)",
+            }}
+          />
+        </div>
         <div className="c-w">
-          <div className="c-calc__in">
-            <Reveal as="span" className="c-cap c-cap--n" style={{ justifyContent: "center" }}>
-              Project Scope · Indicative
-            </Reveal>
-            <Reveal as="h3" index={1}>
-              How big is this, really?
-            </Reveal>
-            <Reveal as="p" index={2}>
-              Set a rough team size and timeline — we&rsquo;ll show what kind of engagement that
-              typically looks like. This is directional only; every project gets a real scoping
-              call before anything is estimated in detail.
-            </Reveal>
-            <Reveal index={3}>
-              <ScopeEstimator />
-            </Reveal>
-          </div>
+          <ProjectStarterWizard />
         </div>
       </section>
 
-      {/* ============ 04 · WORK ============ */}
+      {/* ============ 04 · WORK (case study carousel) ============ */}
       <section className="c-sec" id="ch-work">
-        <div className="c-w">
-          <SectionHead
-            kicker="Selected Work"
-            title="Products we've helped build"
-            lead="A few of the platforms we've shipped — spanning e-commerce, publishing, and public-sector work."
-          />
-          <HairlineList>
-            <ListRow
-              tag="E-Commerce"
-              title="Kasabeeston"
-              description="A complete e-commerce suite — website, Android app, and iOS app built as one connected shopping experience."
-              externalHref="https://kasabeeston.com/"
-            />
-            <ListRow
-              tag="Publishing"
-              title="Entertainment Couch"
-              description="A content publishing platform for entertainment, technology, fashion, and lifestyle news."
-              externalHref="https://entertainmentcouch.com/"
-            />
-            <ListRow
-              tag="Web"
-              title="Islamabad Tennis Complex"
-              description="Web development for a sports facility's public-facing site."
-              externalHref="https://islamabadtennis.com/"
-            />
-          </HairlineList>
-        </div>
+        <CaseStudyCarousel />
       </section>
 
-      {/* ============ 05 · JOURNAL ============ */}
-      <section className="c-sec" id="ch-journal" style={{ background: "var(--cm)" }}>
-        <div className="c-w">
-          <SectionHead
-            kicker="From the Blog"
-            title="Notes on software and growth"
-            lead="The latest technology-related content and analysis from our team."
-          />
-          <HairlineList>
-            <ListRow
-              tag="Jul 20, 2026"
-              title="Dot Chaser – Classic Arcade Fun"
-              description="A retro arcade game experience on Fire Tablets and TV."
-              externalHref="https://speckpro.com/dot-chaser-classic-arcade-game/"
-            />
-            <ListRow
-              tag="Jul 19, 2026"
-              title="Permit Hub App"
-              description="Take control of your app permissions and protect your digital privacy."
-              externalHref="https://speckpro.com/https-speckpro-com-permit-hub-app-permission-manager/"
-            />
-            <ListRow
-              tag="Archive"
-              title="Read the full journal"
-              description="More on web design, app development, and digital marketing."
-              externalHref="https://speckpro.com/blog/"
-            />
-          </HairlineList>
-        </div>
-      </section>
+      {/* ============ 05 · JOURNAL (illustrated blog cards) ============ */}
+      <BlogCardGrid />
+
+      {/* ============ 05.5 · CTA ============ */}
+      <WaveCTA />
     </>
   );
 }

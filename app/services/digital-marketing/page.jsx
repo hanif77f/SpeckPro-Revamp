@@ -8,10 +8,14 @@ import ApproachSection from "../../../components/services/ApproachSection";
 import ExploreMore from "../../../components/services/ExploreMore";
 
 export const metadata = {
-  title: "Digital Marketing",
+  title: {
+    absolute: "Digital Marketing Services",
+  },
   description:
-    "SEO, PPC, social, content, and email marketing from SpeckPro Digital, built to maximize reach and return on investment.",
-  alternates: { canonical: "/services/digital-marketing" },
+    "SEO, PPC, social, content, and email marketing from SpeckPro Digital, planned as one strategy to maximize reach and return on investment.",
+  alternates: {
+    canonical: "/services/digital-marketing",
+  },
 };
 
 const railItems = [

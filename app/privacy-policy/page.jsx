@@ -8,10 +8,14 @@ import { ringPresets } from "../../lib/ringPresets";
 import { siteConfig } from "../../lib/siteConfig";
 
 export const metadata = {
-  title: "Privacy Policy",
+  title: {
+    absolute: "Privacy Policy",
+  },
   description:
-    "How SpeckPro Digital collects, uses, stores, shares, and protects your personal data across our website, mobile applications, products, and services.",
-  alternates: { canonical: "/privacy-policy" },
+    "Learn how SpeckPro Digital collects, uses, stores, and protects your personal data across our website, apps, and services.",
+  alternates: {
+    canonical: "/privacy-policy",
+  },
 };
 
 const railItems = [

@@ -8,10 +8,14 @@ import ApproachSection from "../../../components/services/ApproachSection";
 import ExploreMore from "../../../components/services/ExploreMore";
 
 export const metadata = {
-  title: "Mobile App Development",
+  title: {
+    absolute: "Mobile App Development",
+  },
   description:
-    "High-performing, scalable iOS and Android app development from SpeckPro Digital — business, social, health, and on-demand apps.",
-  alternates: { canonical: "/services/mobile-app-development" },
+    "High-performing iOS and Android app development from SpeckPro Digital, built for business, social, health, and on-demand use cases.",
+  alternates: {
+    canonical: "/services/mobile-app-development",
+  },
 };
 
 const railItems = [

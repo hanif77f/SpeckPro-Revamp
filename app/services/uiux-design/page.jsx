@@ -8,10 +8,14 @@ import ApproachSection from "../../../components/services/ApproachSection";
 import ExploreMore from "../../../components/services/ExploreMore";
 
 export const metadata = {
-  title: "UI/UX Design",
+  title: {
+    absolute: "UI/UX Design Services",
+  },
   description:
-    "User-centric UI/UX design services from SpeckPro Digital — wireframing, prototyping, design personas, and user testing.",
-  alternates: { canonical: "/services/uiux-design" },
+    "User-centric UI/UX design from SpeckPro Digital — wireframing, prototyping, and user testing that turns ideas into interfaces customers love.",
+  alternates: {
+    canonical: "/services/uiux-design",
+  },
 };
 
 const railItems = [

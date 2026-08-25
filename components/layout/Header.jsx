@@ -3,6 +3,12 @@
 import Link from "next/link";
 import { services, primaryNav } from "../../lib/nav";
 
+const ChevronIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4">
+    <path d="M6 9l6 6 6-6" />
+  </svg>
+);
+
 export default function Header({ stuck, onBurgerClick, overlayOpen }) {
   return (
     <header className={`c-hd${stuck ? " stuck" : ""}`}>
@@ -25,22 +31,26 @@ export default function Header({ stuck, onBurgerClick, overlayOpen }) {
         </Link>
 
         <nav className="c-hnav">
-          {/* First primary-nav item is "About"; render it, then the Services
-              dropdown, then the rest, to match the original order exactly. */}
-          <Link href={primaryNav[0].href}>{primaryNav[0].label}</Link>
-
-          <div className="has-drop">
-            <Link href={services[0].href}>Services</Link>
-            <div className="drop">
-              {services.map((s) => (
-                <Link key={s.href} href={s.href}>
-                  {s.label}
-                </Link>
-              ))}
+          {/* Services leads the nav now (button-trigger dropdown, keyboard
+              accessible via :focus-within — see globals.css for why this
+              replaced the old link-trigger .has-drop/.drop pattern). */}
+          <div className="c-hnav__drop">
+            <button className="c-hnav__trig" type="button" aria-haspopup="true">
+              Services
+              <ChevronIcon />
+            </button>
+            <div className="c-hnav__menu">
+              <div className="c-hnav__menu-inner">
+                {services.map((s) => (
+                  <Link key={s.href} href={s.href}>
+                    {s.label}
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
 
-          {primaryNav.slice(1).map((item) => (
+          {primaryNav.map((item) => (
             <Link key={item.href} href={item.href}>
               {item.label}
             </Link>
@@ -48,7 +58,10 @@ export default function Header({ stuck, onBurgerClick, overlayOpen }) {
         </nav>
 
         <div className="c-hact">
-          <Link className="c-hbtn" href="/contact">
+          {/* Links to the homepage's project-starter wizard. Using a real
+              href (not a raw onClick hash-set) so this works correctly
+              from every page, not just when already on "/". */}
+          <Link className="c-hbtn" href="/#ch-estimate">
             Start a Project
           </Link>
           <button

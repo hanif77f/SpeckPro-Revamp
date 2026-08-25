@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { overlayNav, services } from "../../lib/nav";
+import { overlayNav, overlayMore, services } from "../../lib/nav";
 
 export default function IndexOverlay({ open, onClose }) {
   return (
@@ -23,6 +23,14 @@ export default function IndexOverlay({ open, onClose }) {
             {services.map((s) => (
               <Link key={s.href} href={s.href} onClick={onClose}>
                 {s.label}
+              </Link>
+            ))}
+          </div>
+          <h4 style={{ marginTop: 30 }}>More</h4>
+          <div className="c-ovl__list">
+            {overlayMore.map((item) => (
+              <Link key={item.href} href={item.href} onClick={onClose}>
+                {item.label}
               </Link>
             ))}
           </div>

@@ -11,10 +11,14 @@ import { Button } from "../../components/ui/Button";
 import { ringPresets } from "../../lib/ringPresets";
 
 export const metadata = {
-  title: "Blog",
+  title: {
+    absolute: "Blog – Software, Design & Marketing Insights",
+  },
   description:
-    "Notes on software development, web design, app development, and digital marketing from SpeckPro Digital.",
-  alternates: { canonical: "/blog" },
+    "Read the latest articles from SpeckPro Digital on software development, web design, app development, and digital marketing strategy.",
+  alternates: {
+    canonical: "/blog",
+  },
 };
 
 const railItems = [
