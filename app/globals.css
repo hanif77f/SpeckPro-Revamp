@@ -880,3 +880,122 @@ input[type=range]{width:100%; height:34px; accent-color:var(--ct); cursor:pointe
 .c-blog__card:hover .c-blog__more{gap:11px; color:var(--cth);}
 
 .c-blog__card:hover .c-blog__more svg{transform:translateX(3px);}
+
+/* ============================================================
+   NEW — ACCOUNT DELETION PAGE ADDITIONS
+   ============================================================ */
+
+/* ---------- page banner (compact hero for utility pages) ---------- */
+.c-pgbanner{position:relative; overflow:hidden; padding:clamp(140px,20vw,200px) 0 clamp(48px,7vw,72px);}
+
+.c-pgbanner .c-w{position:relative; z-index:2;}
+
+.c-pgbanner .c-cap{color:var(--ci3);}
+
+.c-pgbanner h1{font-size:clamp(2rem,6vw,3.2rem); margin-top:18px; max-width:16ch;}
+
+.c-pgbanner p{margin-top:18px; max-width:60ch; color:var(--ci2); font-size:1rem;}
+
+/* ---------- editable / customize-this callout ---------- */
+.c-edit{border:1px dashed rgba(255,176,32,.55); background:rgba(255,176,32,.07); border-radius:14px; padding:16px 18px; display:flex; gap:12px; align-items:flex-start; margin-bottom:26px;}
+
+.c-edit svg{width:18px; height:18px; flex-shrink:0; margin-top:2px; color:var(--cw);}
+
+.c-edit p{font-size:.84rem; color:var(--ci2); line-height:1.55;}
+
+.c-edit b{color:var(--ci); font-weight:600;}
+
+/* ---------- deletion / general-purpose form ---------- */
+.c-delform{background:var(--cm); border-radius:22px; padding:clamp(24px,5vw,48px); width:100%;}
+
+.c-fgrid{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+
+@media (max-width:640px){ .c-fgrid{grid-template-columns:1fr;} }
+
+.c-field{display:flex; flex-direction:column; gap:8px; min-width:0;}
+
+.c-field.full{grid-column:1 / -1;}
+
+.c-field label{font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--ci2);}
+
+.c-field label .req{color:var(--cw); margin-left:2px;}
+
+.c-field input, .c-field select, .c-field textarea{width:100%; font-family:var(--body); font-size:16px; color:var(--ci); background:var(--cp); border:1px solid var(--cl2); border-radius:12px; padding:14px 16px; transition:border-color .3s var(--e); appearance:none; -webkit-appearance:none;}
+
+.c-field textarea{resize:vertical; min-height:96px;}
+
+.c-field input:focus, .c-field select:focus, .c-field textarea:focus{border-color:var(--ct); outline:none;}
+
+.c-field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2355656E' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 14px center; background-size:16px; padding-right:42px;}
+
+.c-confirm{display:flex; align-items:flex-start; gap:12px; margin-top:22px; padding:16px 18px; border:1px solid var(--cl2); border-radius:14px; background:var(--cp);}
+
+.c-confirm input{width:19px; height:19px; margin-top:2px; flex-shrink:0; accent-color:var(--ct); cursor:pointer;}
+
+.c-confirm label{font-size:.9rem; color:var(--ci2); line-height:1.5; cursor:pointer;}
+
+.c-confirm label b{color:var(--ci); font-weight:600;}
+
+.c-formfoot{display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin-top:26px;}
+
+.c-formerr{font-size:.82rem; color:#C24545; margin-top:14px; display:none;}
+
+.c-formerr.show{display:block;}
+
+@media (max-width:480px){ .c-formfoot{flex-direction:column-reverse; align-items:stretch;} }
+
+/* ---------- success state ---------- */
+.c-success{display:none; text-align:center; padding:clamp(30px,6vw,10px) 0 clamp(10px,4vw,10px);}
+
+.c-success.show{display:block;}
+
+.c-success__ic{width:64px; height:64px; border-radius:50%; background:rgba(14,143,121,.12); color:var(--ct); display:flex; align-items:center; justify-content:center; margin:0 auto 22px;}
+
+.c-success__ic svg{width:28px; height:28px;}
+
+.c-success h3{font-size:1.4rem; margin-bottom:12px;}
+
+.c-success p{color:var(--ci2); max-width:52ch; margin-inline:auto;}
+
+/* ---------- numbered steps (timeline) ---------- */
+.c-steps{display:flex; flex-direction:column;}
+
+.c-step{display:flex; align-items:flex-start; gap:18px; padding-block:22px; border-block-end:1px solid var(--cl);}
+
+.c-step:first-child{border-block-start:1px solid var(--cl);}
+
+.c-step__num{flex:0 0 auto; width:38px; height:38px; border-radius:50%; border:1px solid var(--cl2); display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:.8rem; font-weight:600; color:var(--ct); background:var(--cp);}
+
+.c-step__body{min-width:0; flex:1;}
+
+.c-step__body h4{font-size:1rem; margin-bottom:6px; word-wrap:break-word;}
+
+.c-step__body p{color:var(--ci2); font-size:.9rem; max-width:60ch;}
+
+@media (max-width:480px){
+  .c-step{gap:13px; padding-block:18px;}
+  .c-step__num{width:32px; height:32px; font-size:.72rem;}
+  .c-step__body h4{font-size:.95rem;}
+  .c-step__body p{font-size:.86rem; line-height:1.55;}
+}
+
+/* ---------- retention comparison (two-column) ---------- */
+.c-reten{display:grid; grid-template-columns:1fr 1fr; gap:2px; background:var(--cl); border:1px solid var(--cl); border-radius:18px; overflow:hidden;}
+
+@media (max-width:700px){ .c-reten{grid-template-columns:1fr;} }
+
+.c-reten__col{background:var(--cp); padding:clamp(20px,4vw,28px);}
+
+.c-reten__col h4{font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; margin-bottom:16px; display:flex; align-items:center; gap:10px;}
+
+.c-reten__col.del h4{color:var(--ct);}
+
+.c-reten__col.keep h4{color:var(--cw);}
+
+.c-reten__col ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:13px;}
+
+.c-reten__col li{font-size:.88rem; color:var(--ci2); padding-left:20px; position:relative;}
+
+.c-reten__col li::before{content:''; position:absolute; left:0; top:.55em; width:6px; height:6px; border-radius:50%; background:var(--cl2);}
+
+.c-reten__col li b{color:var(--ci); font-weight:600; display:block; margin-bottom:2px;}
