@@ -21,27 +21,13 @@ const ExternalArrowIcon = () => (
 
 const cases = [
   {
-    mark: "K",
-    name: "Kasabeeston",
-    category: "E-Commerce",
-    stat: (
-      <>
-        A complete e-commerce suite built as one connected shopping experience —{" "}
-        <b>website, Android app, and iOS app</b> shipped together.
-      </>
-    ),
-    href: "https://kasabeeston.com/",
-    external: true,
-    cta: "Visit the site",
-  },
-  {
     mark: "EC",
     name: "Entertainment Couch",
     category: "Publishing",
     stat: (
       <>
-        A content publishing platform covering{" "}
-        <b>entertainment, technology, fashion, and lifestyle</b> news for its readers.
+        A fully automated <b>AI content publisher</b> that verifies and publishes engaging
+        entertainment stories to the platform around the clock.
       </>
     ),
     href: "https://entertainmentcouch.com/",
@@ -49,18 +35,144 @@ const cases = [
     cta: "Visit the site",
   },
   {
-    mark: "IT",
-    name: "Islamabad Tennis Complex",
+    mark: "SM",
+    name: "The Stray Media Website",
     category: "Web Development",
     stat: (
       <>
-        A <b>public-facing website</b> built for a sports facility, covering court schedules,
-        facilities, and booking information.
+        A fully responsive <b>WordPress website</b> built for a video production and digital
+        media studio, ready to scale their online presence.
       </>
     ),
-    href: "https://islamabadtennis.com/",
+    href: "https://straymediaco.com/",
     external: true,
     cta: "Visit the site",
+  },
+  {
+    mark: "UC",
+    name: "Unit Converter App",
+    category: "Mobile App Development",
+    stat: (
+      <>
+        A fast, user-friendly unit converter for iOS and Android —{" "}
+        <b>15+ categories, hundreds of units</b>, and live currency exchange rates.
+      </>
+    ),
+    href: "https://apps.apple.com/nz/app/unit-converter-app/id1640879755",
+    external: true,
+    cta: "View on App Store",
+  },
+  {
+    mark: "K",
+    name: "Kasabeeston",
+    category: "E-Commerce",
+    stat: (
+      <>
+        A grocery and household essentials e-commerce store —{" "}
+        <b>website, Android app, and iOS app</b> — letting shoppers order anytime, anywhere.
+      </>
+    ),
+    href: "https://kasabeeston.com/",
+    external: true,
+    cta: "Visit the site",
+  },
+  {
+    mark: "WA",
+    name: "WiFi Analyzer",
+    category: "Mobile App Development",
+    stat: (
+      <>
+        An all-in-one WiFi analysis app that tests, diagnoses, and improves wireless networks
+        using <b>practical tools and AI-powered guidance</b>.
+      </>
+    ),
+    href: "https://play.google.com/store/apps/details?id=com.wifi.optimizer.internet.app.analyzer.tool.android.odl",
+    external: true,
+    cta: "View on Google Play",
+  },
+  {
+    mark: "KK",
+    name: "Kasookoo",
+    category: "Web Development",
+    stat: (
+      <>
+        A modern <b>ReactJS website</b> for Kasookoo, showcasing their cloud communication and
+        customer engagement tools built for the digital era.
+      </>
+    ),
+    href: "https://www.kasookoo.com/",
+    external: true,
+    cta: "Visit the site",
+  },
+  {
+    mark: "PH",
+    name: "Permit Hub",
+    category: "Mobile App Development",
+    stat: (
+      <>
+        A smart <b>permission manager app</b> that helps users review and control app
+        permissions with clarity, security, and full transparency.
+      </>
+    ),
+    href: "https://play.google.com/store/apps/details?id=com.permithubpermissionmanager.app.android.googleplay",
+    external: true,
+    cta: "View on Google Play",
+  },
+  {
+    mark: "BP",
+    name: "Blood Pressure & Sugar Tracker",
+    category: "Mobile App Development",
+    stat: (
+      <>
+        A comprehensive mobile app that helps users <b>track and monitor</b> their blood
+        pressure and blood sugar levels with ease.
+      </>
+    ),
+    href: "https://play.google.com/store/apps/details?id=com.sugur.blood.playstore",
+    external: true,
+    cta: "View on Google Play",
+  },
+  {
+    mark: "FG",
+    name: "FamiGuard",
+    category: "Mobile App Development",
+    stat: (
+      <>
+        A parental control app that helps parents guide kids&rsquo; digital habits —{" "}
+        <b>tracking location, managing apps, and remote device locking</b>.
+      </>
+    ),
+    href: "https://play.google.com/store/apps/details?id=com.familyguard.parent.app.android.googleplay",
+    external: true,
+    cta: "View on Google Play",
+  },
+  {
+    mark: "CP",
+    name: "Amazon Books (Cyan Publication)",
+    category: "Publishing",
+    stat: (
+      <>
+        A Kindle publishing catalog for Cyan Publishing, delivering{" "}
+        <b>thoughtfully crafted books</b> with creative visual aids for young readers.
+      </>
+    ),
+    href: "https://www.amazon.com/stores/author/B08SWMBKPW",
+    external: true,
+    cta: "View on Amazon",
+  },
+  {
+    mark: "LG",
+    name: "Little Good Deeds Kids",
+    category: "Content / Media",
+    stat: (
+      <>
+        A <b>3D animated kids&rsquo; channel</b> teaching kindness, honesty, and good habits
+        through colorful stories and everyday moral lessons.
+      </>
+    ),
+    href: "https://www.youtube.com/@LittleGoodDeedsKids",
+    external: true,
+    cta: "Watch on YouTube",
   },
   {
     mark: "SP",
@@ -69,7 +181,7 @@ const cases = [
     stat: (
       <>
         More of what we&rsquo;ve shipped — see the <b>full portfolio</b> across e-commerce,
-        publishing, and public-sector projects.
+        publishing, and mobile app projects.
       </>
     ),
     href: "/portfolio",

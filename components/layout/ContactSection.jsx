@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { siteConfig } from "../../lib/siteConfig";
+import { siteConfig, whatsappHref } from "../../lib/siteConfig";
 import { footerNav } from "../../lib/nav";
 import { Button } from "../ui/Button";
 import Reveal from "../ui/Reveal";
@@ -12,16 +12,23 @@ import Reveal from "../ui/Reveal";
  *  - showMap  when true, embeds the real Google Maps iframe under the
  *             Pakistan office (only the Contact page sets this — every
  *             other page gets the compact version with no map)
+ *  - dark     renders the dark/void variant (used by Privacy Policy).
+ *             Every color in this component is already a CSS custom
+ *             property (var(--ci2), var(--ct), etc.), and .c-void
+ *             redefines those properties for its whole subtree — so
+ *             adding that one class is genuinely all this needs to
+ *             flip the entire section to the dark palette correctly.
  */
 export default function ContactSection({
   heading = "Let\u2019s build what\u2019s next.",
   lead = "Describe your project requirements — our expert team will discuss the ways we can collaborate with you.",
   showMap = false,
+  dark = false,
 }) {
   const { offices, contact } = siteConfig;
 
   return (
-    <section className="c-contact" id="ch-contact">
+    <section className={`c-contact${dark ? " c-void" : ""}`} id="ch-contact">
       <div className="c-w">
         <div className="c-cgrid">
           <div>
@@ -42,9 +49,9 @@ export default function ContactSection({
               <Button href={`mailto:${contact.email}`} external>
                 Email Us
               </Button>
-              <Button href={`tel:${contact.phonePkTel}`} variant="ghost" external withArrow={false}>
-                Call Us
-              </Button>
+              <a className="c-btn c-btn--ghost" href={whatsappHref} target="_blank" rel="noopener noreferrer">
+                WhatsApp Us
+              </a>
             </Reveal>
           </div>
 
@@ -52,9 +59,7 @@ export default function ContactSection({
             <div className="c-off">
               <span className="cap2">{offices.pakistan.label}</span>
               <p>{offices.pakistan.address}</p>
-              <p>
-                {contact.phonePk} · {contact.email}
-              </p>
+              <p>{contact.email}</p>
               {showMap && (
                 <div className="map-embed">
                   <iframe
@@ -73,7 +78,7 @@ export default function ContactSection({
               <span className="cap2">{offices.uk.label}</span>
               <p>{offices.uk.address}</p>
               <p>
-                {contact.phoneUk} · {contact.emailUk}
+                {contact.phoneUk} (WhatsApp) · {contact.emailUk}
               </p>
             </div>
           </Reveal>

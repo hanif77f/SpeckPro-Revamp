@@ -1,4 +1,7 @@
+import Link from "next/link";
 import ChapterRail from "../../components/layout/ChapterRail";
+import ContactSection from "../../components/layout/ContactSection";
+import LegalToc from "../../components/legal/LegalToc";
 import AnimVariant from "../../components/ui/AnimVariant";
 import Blooms from "../../components/ui/Blooms";
 import OrbitalRing from "../../components/ui/OrbitalRing";
@@ -8,14 +11,10 @@ import { ringPresets } from "../../lib/ringPresets";
 import { siteConfig } from "../../lib/siteConfig";
 
 export const metadata = {
-  title: {
-    absolute: "Privacy Policy",
-  },
+  title: "Privacy Policy",
   description:
-    "Learn how SpeckPro Digital collects, uses, stores, and protects your personal data across our website, apps, and services.",
-  alternates: {
-    canonical: "/privacy-policy",
-  },
+    "How SpeckPro Digital collects, uses, stores, shares, and protects your personal data across our website, mobile applications, products, and services.",
+  alternates: { canonical: "/privacy-policy" },
 };
 
 const railItems = [
@@ -35,6 +34,12 @@ const toc = [
   { id: "childrens-privacy", label: "8. Children's Privacy" },
   { id: "your-rights", label: "9. Your Privacy Rights" },
 ];
+
+const ArrowIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M5 12h14M13 6l6 6-6 6" />
+  </svg>
+);
 
 export default function PrivacyPolicyPage() {
   return (
@@ -63,8 +68,8 @@ export default function PrivacyPolicyPage() {
             Privacy Policy
           </Reveal>
 
-          <Reveal as="p" className="c-open__s" index={3} style={{ maxWidth: 640 }}>
-            Last updated: November 8, 2025
+          <Reveal as="span" className="c-updated" index={3}>
+            Last updated: August 27, 2026
           </Reveal>
 
           <Reveal as="p" className="c-open__s" index={4}>
@@ -83,14 +88,7 @@ export default function PrivacyPolicyPage() {
       <section className="c-sec" id="ch-policy">
         <div className="c-w">
           <div className="legal-layout">
-            <Reveal as="aside" className="legal-toc">
-              <h5>On This Page</h5>
-              {toc.map((item) => (
-                <a key={item.id} href={`#${item.id}`}>
-                  {item.label}
-                </a>
-              ))}
-            </Reveal>
+            <LegalToc items={toc} />
 
             <Reveal as="article" className="legal-content" index={1}>
               <h2 id="information-we-collect">1. Information We Collect</h2>
@@ -185,17 +183,36 @@ export default function PrivacyPolicyPage() {
                 limit some website functionalities.
               </p>
 
-              <h2 id="account-deletion">7. Account Creation and Deletion (Google Compliance)</h2>
+              <h2 id="account-deletion">7. Account Creation and Deletion</h2>
               <p>
-                If our app or website allows users to create an account, users also have the
-                right to delete their account and associated data at any time.
+                If our website or any app we publish allows you to create an account, you have
+                the right to delete that account and its associated data at any time. Deleting
+                your account permanently removes your profile information and account content; a
+                small set of records may be retained for a limited time where we&rsquo;re legally
+                required to (for example, billing records for tax or accounting purposes).
               </p>
-              <p>
-                <strong>Account Deletion Options:</strong>
-              </p>
+              <p>You can request account deletion in either of the following ways:</p>
               <ul>
-                <li>Within the App: Navigate to Settings → Account → Delete Account</li>
+                <li>
+                  <strong>Within the app or website:</strong> go to Settings → Account → Delete
+                  Account, and confirm.
+                </li>
+                <li>
+                  <strong>Without app access:</strong> submit a request through our dedicated
+                  Account Deletion page, and we&rsquo;ll verify and process it directly.
+                </li>
               </ul>
+
+              <div className="c-delcta">
+                <p>
+                  <strong>Need to delete your account?</strong> Use our dedicated page to submit
+                  a deletion request — no login required.
+                </p>
+                <Link className="c-btn c-btn--pri" href="/account/deletion">
+                  Go to Account Deletion
+                  <ArrowIcon />
+                </Link>
+              </div>
 
               <h2 id="childrens-privacy">8. Children&rsquo;s Privacy</h2>
               <p>
@@ -216,12 +233,15 @@ export default function PrivacyPolicyPage() {
               <p>
                 If you have any questions, concerns, or complaints regarding this Privacy Policy
                 or your data, please contact our privacy team at{" "}
-                <a href={`mailto:${siteConfig.contact.emailUk}`}>{siteConfig.contact.emailUk}</a>.
+                <a href={`mailto:${siteConfig.contact.email}`}>{siteConfig.contact.email}</a>.
               </p>
             </Reveal>
           </div>
         </div>
       </section>
+
+      {/* ============ CONTACT (dark variant) ============ */}
+      <ContactSection dark />
     </>
   );
 }
