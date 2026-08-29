@@ -42,7 +42,7 @@ export default function WhySpeckPro() {
             </div>
             <h3>Global Presence, Local Delivery</h3>
             <p>
-              Teams working out of Islamabad, Pakistan and Bolton, UK — close enough to your
+              Teams working out of Islamabad, Pakistan and UK — close enough to your
               timezone, wherever you&rsquo;re building from.
             </p>
           </div>

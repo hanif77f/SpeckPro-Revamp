@@ -280,29 +280,49 @@ export default function CaseStudyCarousel() {
   const dragState = useRef({ isDown: false, startX: 0, startScroll: 0, moved: false });
 
   function onPointerDown(e) {
-    pauseAutoplay();
-    if (e.pointerType === "touch") return;
-    const track = trackRef.current;
-    dragState.current = { isDown: true, startX: e.clientX, startScroll: track.scrollLeft, moved: false };
-    track.setPointerCapture(e.pointerId);
-  }
-  function onPointerMove(e) {
-    const ds = dragState.current;
-    if (!ds.isDown) return;
-    const dx = e.clientX - ds.startX;
-    if (Math.abs(dx) > 4) ds.moved = true;
-    trackRef.current.scrollLeft = ds.startScroll - dx;
-  }
-  function onPointerUp() {
-    dragState.current.isDown = false;
-  }
-  function onClickCapture(e) {
-    if (dragState.current.moved) {
-      e.preventDefault();
-      e.stopPropagation();
-      dragState.current.moved = false;
+  pauseAutoplay();
+
+  if (e.pointerType === "touch") return;
+
+  const track = trackRef.current;
+
+  dragState.current = {
+    isDown: true,
+    startX: e.clientX,
+    startScroll: track.scrollLeft,
+    moved: false,
+  };
+}
+
+function onPointerMove(e) {
+  const ds = dragState.current;
+  if (!ds.isDown) return;
+
+  const dx = e.clientX - ds.startX;
+
+  if (Math.abs(dx) > 4) {
+    ds.moved = true;
+
+    // Capture only after actual dragging starts
+    if (!trackRef.current.hasPointerCapture(e.pointerId)) {
+      trackRef.current.setPointerCapture(e.pointerId);
     }
   }
+
+  trackRef.current.scrollLeft = ds.startScroll - dx;
+}
+
+function onPointerUp() {
+  dragState.current.isDown = false;
+}
+
+function onClickCapture(e) {
+  if (dragState.current.moved) {
+    e.preventDefault();
+    e.stopPropagation();
+    dragState.current.moved = false;
+  }
+}
   function onTouchStart() {
     pauseAutoplay();
   }

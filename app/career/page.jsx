@@ -96,6 +96,8 @@ export default function CareerPage() {
   const [currentJob, setCurrentJob] = useState(GENERAL_JOB);
   const [submitted, setSubmitted] = useState(false);
   const [showError, setShowError] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const lastFocused = useRef(null);
   const nameInputRef = useRef(null);
 
@@ -127,6 +129,7 @@ export default function CareerPage() {
     setCurrentJob(job || GENERAL_JOB);
     resetFormFields();
     setShowError(false);
+    setSubmitError("");
     setSubmitted(false);
     lastFocused.current = document.activeElement;
     setModalOpen(true);
@@ -149,7 +152,12 @@ export default function CareerPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [modalOpen]);
 
-  function handleApplySubmit(e) {
+  // Sends the application to our own API route, which emails it via
+  // Gmail SMTP — same pattern as the Project Starter Wizard. This is
+  // what guarantees the application actually reaches us, rather than
+  // depending on the candidate's own email client being set up and them
+  // pressing send on a pre-filled mailto: draft.
+  async function handleApplySubmit(e) {
     e.preventDefault();
     const name = apName.trim();
     const email = apEmail.trim();
@@ -163,32 +171,39 @@ export default function CareerPage() {
       return;
     }
     setShowError(false);
+    setSubmitError("");
+    setIsSubmitting(true);
 
-    const bodyLines = [
-      "Role: " + currentJob.title + " (" + currentJob.office + ")",
-      "Name: " + name,
-      "Email: " + email,
-      "Phone: " + phone,
-      "Current location: " + location,
-      apExp ? "Years of experience: " + apExp : null,
-      apNotice ? "Availability / notice period: " + apNotice : null,
-      apLink.trim() ? "LinkedIn/Portfolio: " + apLink.trim() : null,
-      apSalary.trim() ? "Expected salary: " + apSalary.trim() : null,
-      apSource ? "Heard about us via: " + apSource : null,
-      "",
-      "Why they're a good fit:",
-      msg,
-    ]
-      .filter(Boolean)
-      .join("\n");
-
-    const mailto =
-      `mailto:${siteConfig.contact.email}` +
-      `?subject=${encodeURIComponent("Job Application — " + currentJob.title + " — " + name)}` +
-      `&body=${encodeURIComponent(bodyLines)}`;
-
-    window.location.href = mailto;
-    setSubmitted(true);
+    try {
+      const res = await fetch("/api/job-application", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          jobTitle: currentJob.title,
+          jobOffice: currentJob.office,
+          name,
+          email,
+          phone,
+          location,
+          experience: apExp,
+          notice: apNotice,
+          link: apLink.trim(),
+          salary: apSalary.trim(),
+          source: apSource,
+          message: msg,
+        }),
+      });
+      if (!res.ok) throw new Error("Request failed");
+      setSubmitted(true);
+    } catch (err) {
+      setSubmitError(
+        "Something went wrong sending your application — please try again, or email us directly at " +
+          siteConfig.contact.email +
+          "."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -471,10 +486,11 @@ export default function CareerPage() {
                     Please fill in all required fields with a valid email before submitting.
                   </p>
                 )}
+                {submitError && <p className="c-merr show">{submitError}</p>}
 
                 <div className="c-mfoot">
-                  <button type="submit" className="c-btn c-btn--pri">
-                    Submit Application
+                  <button type="submit" className="c-btn c-btn--pri" disabled={isSubmitting}>
+                    {isSubmitting ? "Sending…" : "Submit Application"}
                     <ArrowIcon />
                   </button>
                 </div>
@@ -485,10 +501,10 @@ export default function CareerPage() {
               <div className="c-msuccess__ic">
                 <CheckIcon />
               </div>
-              <h3>Application ready to send</h3>
+              <h3>Application sent</h3>
               <p>
-                We&rsquo;ve opened an email to our hiring team with your details. We&rsquo;ll
-                review your application and get back to you soon.
+                Your application has been received by our hiring team. We&rsquo;ll review it and
+                get back to you soon.
               </p>
             </div>
           )}

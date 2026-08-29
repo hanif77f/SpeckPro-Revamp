@@ -14,6 +14,7 @@ const SERVICE_OPTIONS = [
 ];
 
 const STEP_LABELS = ["Service", "Scope", "Describe", "Review"];
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function tierFor(team, mode) {
   const scale = mode === "full" ? team + 2 : team;
@@ -40,8 +41,12 @@ export default function ProjectStarterWizard() {
   const [team, setTeam] = useState(4);
   const [weeks, setWeeks] = useState(8);
   const [description, setDescription] = useState("");
+  const [email, setEmail] = useState("");
   const [showServiceError, setShowServiceError] = useState(false);
+  const [showEmailError, setShowEmailError] = useState(false);
   const [success, setSuccess] = useState(null); // null | "WhatsApp" | "Email"
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const { tier, sub } = useMemo(() => tierFor(team, mode), [team, mode]);
 
@@ -49,12 +54,34 @@ export default function ProjectStarterWizard() {
     `Hi SpeckPro, I'd like to discuss a project.\n` +
     `Service: ${service || "Not specified"}\n` +
     `Engagement: ${tier}, ${team} ${team === 1 ? "person" : "people"}, ${weeks} weeks\n` +
+    `Email: ${email || "Not provided"}\n` +
     `Details: ${description.trim() || "N/A"}`;
 
   const waHref = `https://wa.me/${siteConfig.contact.whatsappNumber}?text=${encodeURIComponent(summary)}`;
-  const emailHref = `mailto:${siteConfig.contact.email}?subject=${encodeURIComponent(
-    "New project enquiry — " + (service || "General")
-  )}&body=${encodeURIComponent(summary)}`;
+
+  // Sends the submission to our own API route, which emails it via Gmail
+  // SMTP — this is what actually guarantees the submission arrives,
+  // rather than depending on the visitor's own email client being set up
+  // and them actually pressing send.
+  async function handleSubmit() {
+    setIsSubmitting(true);
+    setSubmitError("");
+    try {
+      const res = await fetch("/api/project-inquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ service, tier, team, weeks, description, email }),
+      });
+      if (!res.ok) throw new Error("Request failed");
+      setSuccess("Email");
+    } catch (err) {
+      setSubmitError(
+        "Something went wrong sending your request — please try WhatsApp instead, or email us directly."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
 
   function goNext() {
     if (step === 1 && !service) {
@@ -62,6 +89,13 @@ export default function ProjectStarterWizard() {
       return;
     }
     setShowServiceError(false);
+
+    if (step === 3 && !EMAIL_RE.test(email.trim())) {
+      setShowEmailError(true);
+      return;
+    }
+    setShowEmailError(false);
+
     if (step < 4) setStep(step + 1);
   }
 
@@ -76,7 +110,9 @@ export default function ProjectStarterWizard() {
     setTeam(4);
     setWeeks(8);
     setDescription("");
+    setEmail("");
     setShowServiceError(false);
+    setShowEmailError(false);
     setSuccess(null);
   }
 
@@ -230,6 +266,30 @@ export default function ProjectStarterWizard() {
             <p className="c-wiz__sub">
               A few sentences is enough — more context just means a sharper first call.
             </p>
+
+            <label htmlFor="wizEmail" className="c-wiz__inputlbl">
+              Your email <span style={{ color: "var(--cw)" }}>*</span>
+            </label>
+            <input
+              type="email"
+              id="wizEmail"
+              placeholder="you@company.com"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setShowEmailError(false);
+              }}
+              style={showEmailError ? { borderColor: "#FFB020" } : undefined}
+            />
+            {showEmailError && (
+              <p className="c-wiz__note" style={{ color: "#C24545", marginTop: 8 }}>
+                Please enter a valid email so we can get back to you.
+              </p>
+            )}
+
+            <label htmlFor="wizDesc" className="c-wiz__inputlbl">
+              Project details
+            </label>
             <textarea
               id="wizDesc"
               rows={5}
@@ -259,6 +319,10 @@ export default function ProjectStarterWizard() {
                 </span>
               </div>
               <div className="r">
+                <span>Email</span>
+                <span>{email || "Not provided"}</span>
+              </div>
+              <div className="r">
                 <span>Details</span>
                 <span>{description.trim() || "No description added"}</span>
               </div>
@@ -283,29 +347,31 @@ export default function ProjectStarterWizard() {
             </div>
           ) : (
             <div className="c-wiz__btns">
-              <button type="button" className="c-btn c-btn--ghost" onClick={goBack}>
+              <button type="button" className="c-btn c-btn--ghost" onClick={goBack} disabled={isSubmitting}>
                 Back
               </button>
               <a
                 className="c-btn c-btn--ghost"
-                href={emailHref}
-                onClick={() => setSuccess("Email")}
-              >
-                Submit via Email
-              </a>
-              <a
-                className="c-btn c-btn--pri"
                 href={waHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setSuccess("WhatsApp")}
               >
-                Submit Request
-                <ArrowIcon />
+                Send via WhatsApp
               </a>
+              <button
+                type="button"
+                className="c-btn c-btn--pri"
+                onClick={handleSubmit}
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Sending…" : "Submit Request"}
+                <ArrowIcon />
+              </button>
+              {submitError && <span className="c-wiz__note" style={{ color: "#C24545" }}>{submitError}</span>}
               <span className="c-wiz__note">
-                Submitting opens WhatsApp or your email app with your answers pre-filled —
-                you&rsquo;ll confirm the send there.
+                Submitting sends your answers directly to our team — WhatsApp opens the app with
+                your answers pre-filled instead.
               </span>
             </div>
           )}

@@ -443,7 +443,17 @@ input[type=range]{width:100%; height:34px; accent-color:var(--ct); cursor:pointe
 
 .c-btn svg{width:14px; height:14px;}
 
-.c-foot{border-block-start:1px solid var(--cl); margin-top:80px; padding-block:34px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; font-size:.82rem; color:var(--ci3);}
+.c-foot{border-block-start:1px solid var(--cl); margin-top:80px; padding-block:34px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px; font-size:.82rem; color:var(--ci3);}
+
+.c-foot__social{display:flex; align-items:center; gap:10px; flex-basis:100%; justify-content:center;}
+
+@media (min-width:760px){ .c-foot__social{flex-basis:auto; justify-content:flex-start;} }
+
+.c-foot__social a{width:34px; height:34px; border-radius:50%; border:1px solid var(--cl2); display:flex; align-items:center; justify-content:center; color:var(--ci2); transition:all .3s var(--e); flex-shrink:0;}
+
+.c-foot__social a:hover{border-color:var(--ct); color:var(--ct);}
+
+.c-foot__social svg{width:15px; height:15px;}
 
 .c-foot nav{display:flex; gap:20px; flex-wrap:wrap;}
 
@@ -685,7 +695,15 @@ input[type=range]{width:100%; height:34px; accent-color:var(--ct); cursor:pointe
 
 .c-wiz__grid button span{display:block; font-size:.78rem; color:var(--ci2); margin-top:4px;}
 
-#wizDesc{width:100%; margin-top:22px; background:rgba(255,255,255,.04); border:1px solid var(--cl2); border-radius:14px; padding:16px; color:var(--ci); font-family:var(--body); font-size:14.5px; resize:vertical;}
+.c-wiz__inputlbl{display:block; margin-top:22px; margin-bottom:8px; font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ci2);}
+
+#wizEmail{width:100%; background:rgba(255,255,255,.04); border:1px solid var(--cl2); border-radius:14px; padding:14px 16px; color:var(--ci); font-family:var(--body); font-size:15px; transition:border-color .3s var(--e);}
+
+#wizEmail:focus{border-color:var(--ct); outline:none;}
+
+#wizEmail::placeholder{color:var(--ci3);}
+
+#wizDesc{width:100%; margin-top:0; background:rgba(255,255,255,.04); border:1px solid var(--cl2); border-radius:14px; padding:16px; color:var(--ci); font-family:var(--body); font-size:14.5px; resize:vertical;}
 
 #wizDesc::placeholder{color:var(--ci3);}
 
@@ -776,7 +794,7 @@ input[type=range]{width:100%; height:34px; accent-color:var(--ct); cursor:pointe
 
 .c-case{margin-top:clamp(8px,1vw,14px); position:relative;}
 
-.c-case__viewport{position:relative; padding-left: 10px; padding-right: 10px;}
+.c-case__viewport{position:relative; padding-left: 12px; padding-right: 12px;}
 
 .c-case__viewport::before, .c-case__viewport::after{content:''; position:absolute; top:0; bottom:16px; width:56px; z-index:2; pointer-events:none;}
 
