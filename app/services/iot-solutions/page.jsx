@@ -9,10 +9,17 @@ import ExploreMore from "../../../components/services/ExploreMore";
 
 export const metadata = {
   title: {
-    absolute: "IoT Solutions & Smart Device Development",
+    absolute: "IoT Solutions & Smart Device Development | SpeckPro Digital",
   },
   description:
     "Customized IoT business applications and smart device solutions from SpeckPro Digital, validated fast with a rapid proof of concept.",
+      keywords: [
+    "IoT solutions",
+    "IoT development company",
+    "smart device development",
+    "connected device platforms",
+    "industrial IoT",
+  ],
   alternates: {
     canonical: "/services/iot-solutions",
   },

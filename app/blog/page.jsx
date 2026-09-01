@@ -7,8 +7,14 @@ import { POSTS } from "../../lib/posts";
 // live in BlogPageClient.jsx instead, which receives the already-loaded
 // posts as a plain prop rather than reading files itself.
 export const metadata = {
-  title: "Blog",
+  title: "Blog | SpeckPro Digital",
   description: "Notes on software development, web design, app development, and digital marketing from SpeckPro Digital.",
+    keywords: [
+    "software development blog",
+    "web design insights",
+    "mobile app development articles",
+    "digital marketing tips",
+  ],
   alternates: { canonical: "/blog" },
 };
 

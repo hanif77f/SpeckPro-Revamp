@@ -7,10 +7,17 @@ import ListRow from "../../components/ui/ListRow";
 
 export const metadata = {
   title: {
-    absolute: "Our Portfolio & Client Projects",
+    absolute: "Our Portfolio & Client Projects | SpeckPro Digital",
   },
   description:
     "See websites, mobile apps, and custom software SpeckPro Digital has delivered for clients across e-commerce, publishing, and other industries.",
+      keywords: [
+    "SpeckPro portfolio",
+    "software development case studies",
+    "client projects",
+    "e-commerce development examples",
+    "mobile app portfolio",
+  ],
   alternates: {
     canonical: "/portfolio",
   },

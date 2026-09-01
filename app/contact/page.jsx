@@ -5,9 +5,14 @@ import ContactSection from "../../components/layout/ContactSection";
 import { siteConfig } from "../../lib/siteConfig";
 
 export const metadata = {
-  title: "Contact Us",
+  title: "Contact Us | SpeckPro Digital",
   description:
     "Get in touch with SpeckPro Digital — offices in Pakistan and the UK. Describe your project and our team will reach out.",
+      keywords: [
+    "contact SpeckPro Digital",
+    "software development quote",
+    "hire web developers",
+  ],
   alternates: {
     canonical: "/contact",
   },

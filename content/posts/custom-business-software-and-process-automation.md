@@ -704,4 +704,3 @@ A custom business dashboard combines data from multiple systems into a centraliz
 ### How do you identify the best automation opportunity?
 
 Start by identifying processes that happen frequently, consume significant time, involve repetitive data entry, create frequent errors, depend on spreadsheets, or delay customers. These workflows often deliver the strongest return on automation investment.
----

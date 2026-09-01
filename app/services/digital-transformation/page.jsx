@@ -9,10 +9,17 @@ import ExploreMore from "../../../components/services/ExploreMore";
 
 export const metadata = {
   title: {
-    absolute: "Digital Transformation & ERP Systems",
+    absolute: "Digital Transformation & ERP Systems | SpeckPro Digital",
   },
   description:
     "Scalable ERP-powered digital transformation from SpeckPro Digital — HR, finance, CRM, and inventory systems configured around your business.",
+      keywords: [
+    "digital transformation services",
+    "ERP systems",
+    "CRM development",
+    "business process automation",
+    "enterprise software solutions",
+  ],
   alternates: {
     canonical: "/services/digital-transformation",
   },

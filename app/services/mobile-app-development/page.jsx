@@ -9,10 +9,17 @@ import ExploreMore from "../../../components/services/ExploreMore";
 
 export const metadata = {
   title: {
-    absolute: "Mobile App Development",
+    absolute: "Mobile App Development | SpeckPro Digital",
   },
   description:
     "High-performing iOS and Android app development from SpeckPro Digital, built for business, social, health, and on-demand use cases.",
+      keywords: [
+    "mobile app development",
+    "iOS app development",
+    "Android app development",
+    "cross-platform app development",
+    "custom mobile app development company",
+  ],
   alternates: {
     canonical: "/services/mobile-app-development",
   },

@@ -16,7 +16,7 @@ import { ringPresets } from "../lib/ringPresets";
 
 export const metadata = {
   title: {
-    absolute: "Website, Mobile App & AI Software Development",
+    absolute: "Website, Mobile App & AI Software Development | SpeckPro Digital",
   },
   description:
     "SpeckPro Digital builds websites, mobile apps, AI solutions, and custom software with agile precision. Offices in Pakistan and the UK.",
@@ -24,6 +24,9 @@ export const metadata = {
     canonical: "/",
   },
 };
+
+
+
 
 const railItems = [
   { id: "top", label: "Open" },

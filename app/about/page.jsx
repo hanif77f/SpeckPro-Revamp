@@ -8,10 +8,15 @@ import Reveal from "../../components/ui/Reveal";
 
 export const metadata = {
   title: {
-    absolute: "About Us – Custom Software Development Company",
+    absolute: "About Us – Custom Software Development Company | SpeckPro Digital",
   },
   description:
     "SpeckPro Digital delivers websites, mobile apps, AI solutions, and custom software development for clients worldwide, from offices in Pakistan and the UK.",
+      keywords: [
+    "custom software development company",
+    "about SpeckPro Digital",
+    "software agency Pakistan UK",
+  ],
   alternates: {
     canonical: "/about",
   },

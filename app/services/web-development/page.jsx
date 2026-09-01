@@ -9,10 +9,18 @@ import ExploreMore from "../../../components/services/ExploreMore";
 
 export const metadata = {
   title: {
-    absolute: "Web Design & Development Services",
+    absolute: "Web Design & Development Services | SpeckPro Digital",
   },
   description:
     "Custom web application development, WordPress and Shopify e-commerce, and responsive website design built to convert visitors into customers.",
+      keywords: [
+    "web design and development services",
+    "custom website development",
+    "WordPress development",
+    "Shopify e-commerce development",
+    "responsive website design",
+    "custom web application development",
+  ],
   alternates: {
     canonical: "/services/web-development",
   },

@@ -9,10 +9,17 @@ import ExploreMore from "../../../components/services/ExploreMore";
 
 export const metadata = {
   title: {
-    absolute: "Digital Marketing Services",
+    absolute: "Digital Marketing Services | SpeckPro Digital",
   },
   description:
     "SEO, PPC, social, content, and email marketing from SpeckPro Digital, planned as one strategy to maximize reach and return on investment.",
+      keywords: [
+    "digital marketing agency",
+    "SEO services",
+    "PPC advertising",
+    "social media marketing",
+    "content marketing strategy",
+  ],
   alternates: {
     canonical: "/services/digital-marketing",
   },

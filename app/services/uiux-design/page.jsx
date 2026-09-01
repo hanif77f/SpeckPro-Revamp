@@ -9,10 +9,17 @@ import ExploreMore from "../../../components/services/ExploreMore";
 
 export const metadata = {
   title: {
-    absolute: "UI/UX Design Services",
+    absolute: "UI/UX Design Services | SpeckPro Digital",
   },
   description:
     "User-centric UI/UX design from SpeckPro Digital — wireframing, prototyping, and user testing that turns ideas into interfaces customers love.",
+      keywords: [
+    "UI/UX design services",
+    "user interface design",
+    "user experience design",
+    "wireframes and prototypes",
+    "product design agency",
+  ],
   alternates: {
     canonical: "/services/uiux-design",
   },
