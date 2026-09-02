@@ -108,7 +108,7 @@ export default function MobileAppDevelopmentPage() {
         links={[
           { label: "UI/UX Design", href: "/services/uiux-design" },
           { label: "Web Development", href: "/services/web-development" },
-          { label: "IoT Solutions", href: "/services/iot-solutions" },
+          { label: "AI & Automation", href: "/services/ai-automation" },
           { label: "Digital Marketing", href: "/services/digital-marketing" },
         ]}
       />

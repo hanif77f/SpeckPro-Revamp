@@ -54,7 +54,7 @@ export default function AboutPage() {
         crumbLabel="About"
         kicker="About SpeckPro"
         title="Delivering complete, IT-powered solutions — engineered around your business"
-        lead="SpeckPro is a global IT solutions company specializing in customized ERP systems, mobile app development, web design, SEO, digital marketing, UI/UX design, and IoT-powered business applications. We design on-time, in-budget, responsive, scalable, and marketable solutions tailored to your business needs."
+        lead="SpeckPro Digital delivers websites, mobile apps, AI solutions, and custom software development for clients worldwide, from offices in Pakistan and the UK."
         pills={heroPills}
       />
 
@@ -140,9 +140,9 @@ export default function AboutPage() {
             />
             <ListRow
               tag="06"
-              title="IoT Solutions"
-              description="IoT-powered business applications with machine learning and cloud integration."
-              href="/services/iot-solutions"
+              title="AI & Automation"
+              description="AI-powered automation and intelligent assistants that cut manual work and speed up decisions."
+              href="/services/ai-automation"
             />
           </HairlineList>
         </div>

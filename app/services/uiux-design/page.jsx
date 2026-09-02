@@ -110,7 +110,7 @@ export default function UiuxDesignPage() {
           { label: "Mobile App Development", href: "/services/mobile-app-development" },
           { label: "Digital Transformation", href: "/services/digital-transformation" },
           { label: "Digital Marketing", href: "/services/digital-marketing" },
-          { label: "IoT Solutions", href: "/services/iot-solutions" },
+          { label: "AI & Automation", href: "/services/ai-automation" },
         ]}
       />
     </>

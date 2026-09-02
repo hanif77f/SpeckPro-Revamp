@@ -65,7 +65,7 @@ export default function WhySpeckPro() {
             </div>
             <h3>One Team, Every Discipline</h3>
             <p>
-              Web, mobile, design, IoT, and marketing sit under one roof — one point of contact
+              Web, mobile, design, ai, and marketing sit under one roof — one point of contact
               instead of five vendors.
             </p>
           </div>

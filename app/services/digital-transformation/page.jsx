@@ -112,7 +112,7 @@ export default function DigitalTransformationPage() {
       <ExploreMore
         title="Pair transformation with the rest of our services"
         links={[
-          { label: "IoT Solutions", href: "/services/iot-solutions" },
+          { label: "AI & Automation", href: "/services/ai-automation" },
           { label: "Web Development", href: "/services/web-development" },
           { label: "Digital Marketing", href: "/services/digital-marketing" },
         ]}

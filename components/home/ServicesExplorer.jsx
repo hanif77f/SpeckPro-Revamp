@@ -24,10 +24,10 @@ const servicesData = [
       "High-performing, scalable, feature-rich mobile apps for iOS and Android, secure and easy to use across business, social, health, and on-demand categories.",
   },
   {
-    title: "IoT Solutions",
-    href: "/services/iot-solutions",
+    title: "AI & Automation",
+    href: "/services/ai-automation",
     description:
-      "Customized IoT business applications and smart devices — consultation-driven, scalable, and cost-effective, backed by rapid proof of concept.",
+      "AI-powered workflow automation and intelligent assistants — consultation-driven, scalable, and cost-effective, backed by rapid proof of concept.",
   },
   {
     title: "Digital Transformation",

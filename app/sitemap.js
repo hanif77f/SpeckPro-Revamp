@@ -23,7 +23,7 @@ export default function sitemap() {
     { path: "/services/web-development", priority: 0.8, changeFrequency: "monthly" },
     { path: "/services/uiux-design", priority: 0.8, changeFrequency: "monthly" },
     { path: "/services/mobile-app-development", priority: 0.8, changeFrequency: "monthly" },
-    { path: "/services/iot-solutions", priority: 0.8, changeFrequency: "monthly" },
+    { path: "/services/ai-automation", priority: 0.8, changeFrequency: "monthly" },
     { path: "/services/digital-transformation", priority: 0.8, changeFrequency: "monthly" },
     { path: "/services/digital-marketing", priority: 0.8, changeFrequency: "monthly" },
     { path: "/portfolio", priority: 0.8, changeFrequency: "monthly" },

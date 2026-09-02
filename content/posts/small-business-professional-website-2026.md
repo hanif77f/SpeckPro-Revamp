@@ -188,7 +188,7 @@ An experienced agency should help prioritise. A small business may launch with a
 
 SpeckPro builds websites around customer journeys and business outcomes. Our web design and development services include responsive business websites, custom web applications, WordPress and Shopify development, and e-commerce solutions.
 
-We bring web development, UI/UX design, mobile apps, digital transformation, IoT, and digital marketing together under one team. That matters when a small website grows into a wider digital platform: the strategy does not need to be handed from one disconnected supplier to another.
+We bring web development, UI/UX design, mobile apps, digital transformation, AI automation, and digital marketing together under one team. That matters when a small website grows into a wider digital platform: the strategy does not need to be handed from one disconnected supplier to another.
 
 Our work includes local service and organisation websites as well as connected digital products. For Kasabeeston, SpeckPro delivered an e-commerce suite spanning the website, Android app, and iOS app.
 

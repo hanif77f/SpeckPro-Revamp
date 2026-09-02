@@ -57,9 +57,7 @@ export default function HomePage() {
                 Engineering digital work, <em>built to move business forward</em>
               </Reveal>
               <Reveal as="p" className="c-open__s" index={2}>
-                SpeckPro is a global IT solutions company building mobile apps, websites, and
-                IoT-powered platforms with agile precision — helping you replace legacy systems
-                with technology built for a customer-centric, digital world.
+                SpeckPro Digital delivers websites, mobile apps, AI solutions, and custom software development for clients worldwide, from offices in Pakistan and the UK.
               </Reveal>
               <HeroSearch />
             </div>

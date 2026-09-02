@@ -7,7 +7,7 @@ const SERVICE_OPTIONS = [
   { v: "Web Development", label: "Web Development", sub: "Websites, e-commerce, custom apps" },
   { v: "UI/UX Design", label: "UI/UX Design", sub: "Wireframes, prototypes, interfaces" },
   { v: "Mobile App Development", label: "Mobile Apps", sub: "iOS, Android, cross-platform" },
-  { v: "IoT Solutions", label: "IoT Solutions", sub: "Connected devices, smart platforms" },
+  { v: "AI & Automation", label: "AI & Automation", sub: "Connected devices, smart platforms" },
   { v: "Digital Transformation", label: "Digital Transformation", sub: "ERP, HR, finance, CRM systems" },
   { v: "Digital Marketing", label: "Digital Marketing", sub: "SEO, PPC, social, content" },
   { v: "Other", label: "Other", sub: "Tell us about it in step 3" },

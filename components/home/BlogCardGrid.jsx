@@ -32,14 +32,28 @@ export default function BlogCardGrid() {
             New articles are on the way — check back soon.
           </Reveal>
         ) : (
+          // Fixed sizing bug: this used to compute grid-template-columns
+          // in JS based on post count (e.g. "repeat(3, 1fr)") and set it
+          // as an inline style. Inline styles always win over stylesheet
+          // rules — including media queries — so once there were 3 posts,
+          // mobile could never collapse this back down to 1 column no
+          // matter what the CSS said.
+          //
+          // Fix: auto-fit with a bounded card width instead. Each card
+          // wants to be between 280px and 380px wide; the browser fits as
+          // many as the actual container width allows. On a narrow phone
+          // screen, only one 280–380px column can physically fit, so it
+          // naturally becomes a single column — no JS, no inline style,
+          // no fighting with breakpoints. justifyContent centers the
+          // populated columns when there are fewer than 3 posts, instead
+          // of stretching a single card to fill the whole row.
           <Reveal
             as="div"
             className="c-blog__grid"
             index={3}
             style={{
-              gridTemplateColumns: `repeat(${Math.min(latestPosts.length, 3)}, 1fr)`,
-              maxWidth: latestPosts.length < 3 ? `${latestPosts.length * 380 + (latestPosts.length - 1) * 26}px` : "none",
-              marginInline: latestPosts.length < 3 ? "auto" : undefined,
+              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 380px))",
+              justifyContent: "center",
             }}
           >
             {latestPosts.map((post) => (

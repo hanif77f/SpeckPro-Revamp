@@ -39,8 +39,8 @@ export default function HeroSearch() {
         <Link className="chip" href="/services/mobile-app-development">
           Mobile Apps
         </Link>
-        <Link className="chip" href="/services/iot-solutions">
-          IoT Solutions
+        <Link className="chip" href="/services/ai-automation">
+          AI & Automation
         </Link>
       </div>
     </Reveal>

@@ -21,7 +21,7 @@ export const metadata = {
     "web development company",
     "mobile app development",
     "UI/UX design services",
-    "IoT solutions",
+    "AI & Automation",
     "digital transformation",
     "digital marketing agency",
     "software development Pakistan",
