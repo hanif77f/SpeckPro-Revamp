@@ -70,13 +70,70 @@ export default function PortfolioPage() {
         <div className="c-w">
           <SectionHead kicker="More Work" title="Sports, education, and NGO platforms" />
           <HairlineList>
-            <ListRow tag="Web" title="Islamabad Tennis Complex" externalHref="https://islamabadtennis.com/" />
-            <ListRow tag="Web" title="HSF Fellows" externalHref="https://hsffellows.pk/" />
-            <ListRow tag="Web" title="PCDP" externalHref="https://pcdp.pk/" />
-            <ListRow tag="Web" title="NTSCPK" externalHref="https://ntscpk.org/" />
-            <ListRow tag="Web" title="PoliSci HSF" externalHref="https://poliscihsf.pk/" />
-            <ListRow tag="Web" title="Takmeel e Quran" externalHref="https://takmeelequran.com/" />
-          </HairlineList>
+ 
+  <ListRow 
+    tag="Mobile App Development" 
+    title="Unit Converter App" 
+    externalHref="https://apps.apple.com/nz/app/unit-converter-app/id1640879755" 
+  />
+
+  <ListRow 
+    tag="Mobile App Development" 
+    title="WiFi Analyzer" 
+    externalHref="https://play.google.com/store/apps/details?id=com.wifi.optimizer.internet.app.analyzer.tool.android.odl" 
+  />
+
+  <ListRow 
+    tag="Web Development" 
+    title="Kasookoo" 
+    externalHref="https://www.kasookoo.com/" 
+  />
+
+  <ListRow 
+    tag="Mobile App Development" 
+    title="Permit Hub" 
+    externalHref="https://play.google.com/store/apps/details?id=com.permithubpermissionmanager.app.android.googleplay" 
+  />
+
+  <ListRow 
+    tag="Mobile App Development" 
+    title="Blood Pressure & Sugar Tracker" 
+    externalHref="https://play.google.com/store/apps/details?id=com.sugur.blood.playstore" 
+  />
+
+  <ListRow 
+    tag="Mobile App Development" 
+    title="FamiGuard" 
+    externalHref="https://play.google.com/store/apps/details?id=com.familyguard.parent.app.android.googleplay" 
+  />
+
+  <ListRow 
+    tag="Publishing" 
+    title="Amazon Books (Cyan Publication)" 
+    externalHref="https://www.amazon.com/stores/author/B08SWMBKPW" 
+  />
+
+  <ListRow 
+    tag="Content / Media" 
+    title="Little Good Deeds Kids" 
+    externalHref="https://www.youtube.com/@LittleGoodDeedsKids" 
+  />
+
+  <ListRow 
+    tag="Mobile App" 
+    title="WiFi Analyzer" 
+    externalHref="https://play.google.com/store/apps/details?id=com.wifi.optimizer.internet.app.analyzer.tool.android.odl" 
+  />
+
+  <ListRow 
+    tag="Web" 
+    title="The Stray Media" 
+    externalHref="https://straymediaco.com/" 
+  />
+
+
+
+</HairlineList>
         </div>
       </section>
     </>
