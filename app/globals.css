@@ -1385,3 +1385,39 @@ input[type=range]{width:100%; height:34px; accent-color:var(--ct); cursor:pointe
 .c-delcta p{margin-top:0; color:var(--ci2); font-size:.95rem;}
 
 .c-delcta .c-btn{margin-top:16px;}
+
+
+/* ============================================================
+   NEW — PORTFOLIO PAGE ADDITIONS
+   (Note: .c-hero and .c-filters/.c-filter already exist from the
+   Career page update — only the Featured cards and grid cards below
+   are genuinely new.)
+   ============================================================ */
+
+/* ---------- featured (big 2-up cards) ---------- */
+.c-feat__grid{display:grid; grid-template-columns:repeat(2,1fr); gap:26px;}
+@media (max-width:780px){ .c-feat__grid{grid-template-columns:1fr;} }
+.c-feat__card{display:flex; flex-direction:column; border:1px solid var(--cl); border-radius:24px; background:var(--cp); padding:36px 32px; transition:border-color .35s var(--e), box-shadow .35s var(--e), transform .35s var(--e);}
+.c-feat__card:hover{border-color:var(--ct); box-shadow:0 24px 50px -26px rgba(14,143,121,.28); transform:translateY(-4px);}
+.c-feat__tag{font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ct); margin-bottom:16px; display:block;}
+.c-feat__card h3{font-size:1.5rem; margin-bottom:14px;}
+.c-feat__card p{color:var(--ci2); font-size:1.02rem; flex:1;}
+.c-feat__logo{display:flex; align-items:center; gap:13px; margin-top:26px; padding-top:22px; border-top:1px solid var(--cl);}
+.c-feat__mark{width:46px; height:46px; border-radius:12px; background:var(--cm); border:1px solid var(--cl); display:flex; align-items:center; justify-content:center; flex-shrink:0; overflow:hidden; padding:6px;}
+.c-feat__mark img{width:100%; height:100%; object-fit:contain; display:block;}
+.c-feat__btn{margin-top:24px; display:inline-flex; align-items:center; gap:9px; align-self:flex-start; border:1px solid var(--cw); color:var(--ci); padding:13px 22px; border-radius:12px; font-size:.88rem; font-weight:600; transition:all .3s var(--e);}
+.c-feat__btn:hover{background:var(--cw); color:#3A2600; border-color:var(--cw);}
+
+/* ---------- all-projects grid cards ---------- */
+.c-pf__grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+@media (max-width:980px){ .c-pf__grid{grid-template-columns:repeat(2,1fr);} }
+@media (max-width:640px){ .c-pf__grid{grid-template-columns:1fr;} }
+.c-pf__card{display:flex; flex-direction:column; border:1px solid var(--cl); border-radius:20px; background:var(--cp); padding:26px 24px; transition:border-color .35s var(--e), box-shadow .35s var(--e), transform .35s var(--e);}
+.c-pf__card:hover{border-color:var(--cl2); box-shadow:0 20px 40px -24px rgba(11,22,32,.16); transform:translateY(-3px);}
+.c-pf__tag{font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--ct); margin-bottom:10px; display:block;}
+.c-pf__card h4{font-size:1.05rem; margin-bottom:10px;}
+.c-pf__card p{color:var(--ci2); font-size:.88rem; flex:1; line-height:1.6;}
+.c-pf__logo{display:flex; align-items:center; gap:11px; margin-top:20px; padding-top:16px; border-top:1px solid var(--cl);}
+.c-pf__mark{width:36px; height:36px; border-radius:10px; background:var(--cm); border:1px solid var(--cl); display:flex; align-items:center; justify-content:center; flex-shrink:0; overflow:hidden;}
+.c-pf__mark img{width:100%; height:100%; object-fit:contain; display:block;}
+.c-pf__btn{margin-top:16px; font-family:var(--mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:var(--ct); display:inline-flex; align-items:center; gap:6px;}
