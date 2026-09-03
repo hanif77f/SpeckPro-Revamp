@@ -1,3 +1,4 @@
+import Script from "next/script";
 import { ibmPlexSans, ibmPlexMono } from "../lib/fonts";
 import { siteConfig } from "../lib/siteConfig";
 import SiteChrome from "../components/layout/SiteChrome";
@@ -100,6 +101,21 @@ export default function RootLayout({ children }) {
         </main>
 
         <WhatsAppFab />
+        {/* Google Analytics */}
+<Script
+  src="https://www.googletagmanager.com/gtag/js?id=G-V73LHKRE35"
+  strategy="afterInteractive"
+/>
+
+<Script id="google-analytics" strategy="afterInteractive">
+  {`
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-V73LHKRE35');
+  `}
+</Script>
       </body>
     </html>
   );
