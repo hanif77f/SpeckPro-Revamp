@@ -29,8 +29,15 @@ export default function AccountDeletionPage() {
   const [confirmed, setConfirmed] = useState(false);
   const [showError, setShowError] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
-  function handleSubmit(e) {
+  // Sends the request to our own API route, which emails it via Gmail
+  // SMTP — same pattern as the Project Starter Wizard and Career
+  // application form. This is what guarantees the request actually
+  // reaches us, rather than depending on the visitor's own email client
+  // being set up and them pressing send on a pre-filled mailto: draft.
+  async function handleSubmit(e) {
     e.preventDefault();
 
     const trimmedName = name.trim();
@@ -42,24 +49,32 @@ export default function AccountDeletionPage() {
       return;
     }
     setShowError(false);
+    setSubmitError("");
+    setIsSubmitting(true);
 
-    const bodyLines = [
-      "Name: " + trimmedName,
-      "Email: " + trimmedEmail,
-      phone.trim() ? "Phone: " + phone.trim() : null,
-      reason ? "Reason: " + reason : null,
-      notes.trim() ? "Notes: " + notes.trim() : null,
-    ]
-      .filter(Boolean)
-      .join("\n");
-
-    const mailto =
-      `mailto:${siteConfig.contact.email}` +
-      `?subject=${encodeURIComponent("Account Deletion Request — " + trimmedName)}` +
-      `&body=${encodeURIComponent(bodyLines)}`;
-
-    window.location.href = mailto;
-    setSubmitted(true);
+    try {
+      const res = await fetch("/api/account-deletion", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: trimmedName,
+          email: trimmedEmail,
+          phone: phone.trim(),
+          reason,
+          notes: notes.trim(),
+        }),
+      });
+      if (!res.ok) throw new Error("Request failed");
+      setSubmitted(true);
+    } catch (err) {
+      setSubmitError(
+        "Something went wrong sending your request — please try again, or email us directly at " +
+          siteConfig.contact.email +
+          "."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -188,10 +203,11 @@ export default function AccountDeletionPage() {
                   permanent.
                 </p>
               )}
+              {submitError && <p className="c-formerr show">{submitError}</p>}
 
               <div className="c-formfoot">
-                <button type="submit" className="c-btn c-btn--pri">
-                  Confirm Deletion
+                <button type="submit" className="c-btn c-btn--pri" disabled={isSubmitting}>
+                  {isSubmitting ? "Sending…" : "Confirm Deletion"}
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M5 12h14M13 6l6 6-6 6" />
                   </svg>
@@ -211,9 +227,9 @@ export default function AccountDeletionPage() {
                 </div>
                 <h3>Request received</h3>
                 <p>
-                  We&rsquo;ve opened an email to our support team with your details. Once we
-                  verify your request, your account and its data will be permanently deleted
-                  within 30 days, and you&rsquo;ll get a confirmation email.
+                  Your request has been sent to our support team. Once we verify it, your account
+                  and its data will be permanently deleted within 30 days, and you&rsquo;ll get a
+                  confirmation email.
                 </p>
               </div>
             </div>
