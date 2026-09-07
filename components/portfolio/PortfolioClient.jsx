@@ -126,6 +126,14 @@ const PROJECTS = [
     mark: "/images/logos/13.png",
     cta: "View on Google Play",
   },
+  {
+    cat: "Mobile App Development",
+    name: "Emotion Detector",
+    desc: "An AI-powered app that detects and tracks emotions from faces and images in real time, with secure data protection.",
+    href: "https://play.google.com/store/apps/details?id=com.ai.emotion.detector.android1&hl=en",
+    mark: "/images/logos/emotional detector.png",
+    cta: "View on Google Play",
+  },
 ];
 
 const CATEGORIES = ["all", "Web Development", "Mobile App Development", "E-Commerce", "Publishing"];

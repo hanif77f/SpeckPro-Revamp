@@ -65,7 +65,19 @@ export default function ServicesExplorer() {
       <div className="c-x__d">
         <h3>{current.title}</h3>
         <p>{current.description}</p>
-        <Link className="go" href="/contact">
+        <Link href="/#cWiz"
+  className="go"
+  onClick={(e) => {
+    e.preventDefault();
+    const target = document.getElementById("cWiz");
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      // Not on the homepage — fall back to normal navigation
+      window.location.href = "/#cWiz";
+    }
+  }}
+>
           Start this project
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M5 12h14M13 6l6 6-6 6" />

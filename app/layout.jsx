@@ -3,6 +3,7 @@ import { ibmPlexSans, ibmPlexMono } from "../lib/fonts";
 import { siteConfig } from "../lib/siteConfig";
 import SiteChrome from "../components/layout/SiteChrome";
 import WhatsAppFab from "../components/layout/WhatsAppFab";
+import BackToTop from "../components/layout/BackToTop";
 import ConditionalContactSection from "../components/layout/ConditionalContactSection";
 import "./globals.css";
 
@@ -102,6 +103,7 @@ export default function RootLayout({ children }) {
 
         <WhatsAppFab />
         {/* Google Analytics */}
+        <BackToTop />
 <Script
   src="https://www.googletagmanager.com/gtag/js?id=G-V73LHKRE35"
   strategy="afterInteractive"
