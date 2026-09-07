@@ -94,9 +94,20 @@ export default function Header({ stuck, onBurgerClick, overlayOpen }) {
           {/* Links to the homepage's project-starter wizard. Using a real
               href (not a raw onClick hash-set) so this works correctly
               from every page, not just when already on "/". */}
-          <Link className="c-hbtn" href="/#ch-estimate">
-            Start a Project
-          </Link>
+          <Link
+  className="c-hbtn"
+  href="/#ch-estimate"
+  onClick={(e) => {
+    if (window.location.pathname === "/") {
+      e.preventDefault();
+      document.getElementById("ch-estimate")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    // On any other page, let Link navigate normally to "/" — the
+    // browser's native hash-on-load behavior takes over from there.
+  }}
+>
+  Start a Project
+</Link>
           <button
             className="c-burg"
             aria-expanded={overlayOpen}

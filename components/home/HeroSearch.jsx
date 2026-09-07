@@ -20,12 +20,20 @@ export default function HeroSearch() {
           What are you building?
         </label>
         <input id="qc" type="text" placeholder="Try “mobile app for logistics” or “website redesign”…" />
-        <button type="submit">
-          Start a Project
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M5 12h14M13 6l6 6-6 6" />
-          </svg>
-        </button>
+        <button
+  type="submit"
+  onClick={(e) => {
+    e.preventDefault();
+    document
+      .getElementById("ch-estimate")
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }}
+>
+  Start a Project
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M5 12h14M13 6l6 6-6 6" />
+  </svg>
+</button>
       </form>
 
       <div className="c-chips">

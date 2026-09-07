@@ -64,8 +64,9 @@ export default function WaveCTA() {
             SpeckPro plugs into what you already have — legacy systems, existing platforms,
             half-finished builds — and ships from there. No rip-and-replace required.
           </Reveal>
+          
           <Reveal as="div" className="c-actions" index={3}>
-            <a className="c-btn c-btn--pri" href="#ch-estimate">
+            <a className="c-btn c-btn--pri" href="#ch-estimate" >
               Start a Project
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M5 12h14M13 6l6 6-6 6" />
