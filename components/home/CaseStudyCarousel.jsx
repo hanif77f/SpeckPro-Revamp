@@ -19,9 +19,14 @@ const ExternalArrowIcon = () => (
   </svg>
 );
 
+// mark paths reuse the exact same numbered logo files as the Portfolio
+// page (1.png through 13.png) for the same projects — no separate set
+// of images to manage. "SpeckPro Portfolio" is the one card that isn't
+// an external client project, so it keeps a plain text mark instead of
+// a numbered logo file.
 const cases = [
   {
-    mark: "EC",
+    mark: "/images/logos/4.png",
     name: "Entertainment Couch",
     category: "Publishing",
     stat: (
@@ -35,7 +40,7 @@ const cases = [
     cta: "Visit the site",
   },
   {
-    mark: "SM",
+    mark: "/images/logos/5.png",
     name: "The Stray Media Website",
     category: "Web Development",
     stat: (
@@ -49,7 +54,7 @@ const cases = [
     cta: "Visit the site",
   },
   {
-    mark: "UC",
+    mark: "/images/logos/6.png",
     name: "Unit Converter App",
     category: "Mobile App Development",
     stat: (
@@ -63,7 +68,7 @@ const cases = [
     cta: "View on App Store",
   },
   {
-    mark: "K",
+    mark: "/images/logos/3.png",
     name: "Kasabeeston",
     category: "E-Commerce",
     stat: (
@@ -77,7 +82,7 @@ const cases = [
     cta: "Visit the site",
   },
   {
-    mark: "WA",
+    mark: "/images/logos/7.png",
     name: "WiFi Analyzer",
     category: "Mobile App Development",
     stat: (
@@ -91,7 +96,7 @@ const cases = [
     cta: "View on Google Play",
   },
   {
-    mark: "KK",
+    mark: "/images/logos/8.png",
     name: "Kasookoo",
     category: "Web Development",
     stat: (
@@ -105,7 +110,7 @@ const cases = [
     cta: "Visit the site",
   },
   {
-    mark: "PH",
+    mark: "/images/logos/1.png",
     name: "Permit Hub",
     category: "Mobile App Development",
     stat: (
@@ -119,7 +124,7 @@ const cases = [
     cta: "View on Google Play",
   },
   {
-    mark: "BP",
+    mark: "/images/logos/9.png",
     name: "Blood Pressure & Sugar Tracker",
     category: "Mobile App Development",
     stat: (
@@ -133,7 +138,7 @@ const cases = [
     cta: "View on Google Play",
   },
   {
-    mark: "FG",
+    mark: "/images/logos/10.png",
     name: "FamiGuard",
     category: "Mobile App Development",
     stat: (
@@ -147,7 +152,7 @@ const cases = [
     cta: "View on Google Play",
   },
   {
-    mark: "CP",
+    mark: "/images/logos/11.png",
     name: "Amazon Books (Cyan Publication)",
     category: "Publishing",
     stat: (
@@ -161,7 +166,7 @@ const cases = [
     cta: "View on Amazon",
   },
   {
-    mark: "LG",
+    mark: "/images/logos/2.png",
     name: "Little Good Deeds Kids",
     category: "Content / Media",
     stat: (
@@ -175,7 +180,8 @@ const cases = [
     cta: "Watch on YouTube",
   },
   {
-    mark: "SP",
+    mark: null, // not a numbered client logo — this card is about SpeckPro itself
+    markText: "SP",
     name: "SpeckPro Portfolio",
     category: "All Projects",
     stat: (
@@ -190,23 +196,45 @@ const cases = [
   },
 ];
 
+const REAL_LENGTH = cases.length;
+// Matches the 3-visible-cards-per-row layout — enough clones on each
+// end that there's always real (if repeated) content to scroll into,
+// in both directions.
+const CLONE_COUNT = 3;
+const FIRST_REAL = CLONE_COUNT;
+const LAST_REAL = CLONE_COUNT + REAL_LENGTH - 1;
+
+// [clones of last 3] + [all 12 real cards] + [clones of first 3]
+const renderedCases = [
+  ...cases.slice(-CLONE_COUNT),
+  ...cases,
+  ...cases.slice(0, CLONE_COUNT),
+].map((c, i) => ({ ...c, _key: `${c.name}-${i}` }));
+
+function toRealIndex(renderedIdx) {
+  return ((renderedIdx - FIRST_REAL) % REAL_LENGTH + REAL_LENGTH) % REAL_LENGTH;
+}
+
 const AUTOPLAY_MS = 4500;
 const RESUME_AFTER_MS = 7000;
+const RESET_SETTLE_MS = 550; // fallback if the scrollend event isn't supported
 
 export default function CaseStudyCarousel() {
   const trackRef = useRef(null);
   const cardRefs = useRef([]);
   const autoplayTimer = useRef(null);
   const resumeTimer = useRef(null);
+  const resetTimer = useRef(null);
   const isVisible = useRef(true);
   const reduceMotion = useRef(false);
+  const isResetting = useRef(false);
 
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0); // real index, 0-11, for dots/counter
 
-  function currentIndex() {
+  function currentRenderedIndex() {
     const track = trackRef.current;
-    if (!track) return 0;
-    let closest = 0;
+    if (!track) return FIRST_REAL;
+    let closest = FIRST_REAL;
     let closestDist = Infinity;
     cardRefs.current.forEach((card, i) => {
       if (!card) return;
@@ -219,8 +247,34 @@ export default function CaseStudyCarousel() {
     return closest;
   }
 
-  function scrollToCard(i) {
-    const card = cardRefs.current[i];
+  // Jumps instantly (no animation) to the equivalent real-card position
+  // when the current position is sitting on a clone — since clones are
+  // visually identical to their real counterparts, this jump is
+  // imperceptible as long as it happens after the smooth scroll has
+  // actually settled, not mid-animation.
+  function settleIfOnClone() {
+    const idx = currentRenderedIndex();
+    if (idx >= FIRST_REAL && idx <= LAST_REAL) return; // already on a real card, nothing to do
+
+    const shift = idx > LAST_REAL ? -REAL_LENGTH : REAL_LENGTH;
+    const targetIdx = idx + shift;
+    const targetCard = cardRefs.current[targetIdx];
+    const track = trackRef.current;
+    if (!targetCard || !track) return;
+
+    isResetting.current = true;
+    track.scrollLeft = targetCard.offsetLeft;
+    // Release the guard on the next frame, once the instant jump has
+    // actually applied — otherwise the scroll listener below could
+    // read a stale position mid-jump and miscompute activeIndex.
+    requestAnimationFrame(() => {
+      isResetting.current = false;
+      setActiveIndex(toRealIndex(targetIdx));
+    });
+  }
+
+  function scrollToRendered(renderedIdx) {
+    const card = cardRefs.current[renderedIdx];
     if (card) card.scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
   }
 
@@ -233,7 +287,7 @@ export default function CaseStudyCarousel() {
     if (reduceMotion.current || autoplayTimer.current) return;
     autoplayTimer.current = setInterval(() => {
       if (!isVisible.current) return;
-      scrollToCard((currentIndex() + 1) % cases.length);
+      scrollToRendered(currentRenderedIndex() + 1);
     }, AUTOPLAY_MS);
   }
 
@@ -249,8 +303,36 @@ export default function CaseStudyCarousel() {
     const track = trackRef.current;
     if (!track) return;
 
-    const onScroll = () => setActiveIndex(currentIndex());
+    // Start on the first REAL card, not the leading clones — instant,
+    // no animation, since this is the initial mount position.
+    const firstReal = cardRefs.current[FIRST_REAL];
+    if (firstReal) track.scrollLeft = firstReal.offsetLeft;
+    setActiveIndex(0);
+
+    function scheduleSettleCheck() {
+      clearTimeout(resetTimer.current);
+      if ("onscrollend" in window) {
+        // Prefer the real scrollend event when supported — fires
+        // exactly when scrolling (including smooth scrolling) stops,
+        // which is the precise moment to check for a clone reset.
+        return;
+      }
+      resetTimer.current = setTimeout(settleIfOnClone, RESET_SETTLE_MS);
+    }
+
+    function onScroll() {
+      if (isResetting.current) return;
+      setActiveIndex(toRealIndex(currentRenderedIndex()));
+      scheduleSettleCheck();
+    }
+
+    function onScrollEnd() {
+      if (isResetting.current) return;
+      settleIfOnClone();
+    }
+
     track.addEventListener("scroll", onScroll, { passive: true });
+    track.addEventListener("scrollend", onScrollEnd);
 
     let observer;
     if (!reduceMotion.current && "IntersectionObserver" in window) {
@@ -269,9 +351,11 @@ export default function CaseStudyCarousel() {
 
     return () => {
       track.removeEventListener("scroll", onScroll);
+      track.removeEventListener("scrollend", onScrollEnd);
       if (observer) observer.disconnect();
       stopAutoplay();
       clearTimeout(resumeTimer.current);
+      clearTimeout(resetTimer.current);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -280,49 +364,53 @@ export default function CaseStudyCarousel() {
   const dragState = useRef({ isDown: false, startX: 0, startScroll: 0, moved: false });
 
   function onPointerDown(e) {
-  pauseAutoplay();
+    pauseAutoplay();
 
-  if (e.pointerType === "touch") return;
+    if (e.pointerType === "touch") return;
 
-  const track = trackRef.current;
+    const track = trackRef.current;
 
-  dragState.current = {
-    isDown: true,
-    startX: e.clientX,
-    startScroll: track.scrollLeft,
-    moved: false,
-  };
-}
+    dragState.current = {
+      isDown: true,
+      startX: e.clientX,
+      startScroll: track.scrollLeft,
+      moved: false,
+    };
+  }
 
-function onPointerMove(e) {
-  const ds = dragState.current;
-  if (!ds.isDown) return;
+  function onPointerMove(e) {
+    const ds = dragState.current;
+    if (!ds.isDown) return;
 
-  const dx = e.clientX - ds.startX;
+    const dx = e.clientX - ds.startX;
 
-  if (Math.abs(dx) > 4) {
-    ds.moved = true;
+    if (Math.abs(dx) > 4) {
+      ds.moved = true;
 
-    // Capture only after actual dragging starts
-    if (!trackRef.current.hasPointerCapture(e.pointerId)) {
-      trackRef.current.setPointerCapture(e.pointerId);
+      if (!trackRef.current.hasPointerCapture(e.pointerId)) {
+        trackRef.current.setPointerCapture(e.pointerId);
+      }
+    }
+
+    trackRef.current.scrollLeft = ds.startScroll - dx;
+  }
+
+  function onPointerUp() {
+    dragState.current.isDown = false;
+    // Manual drags don't fire a smooth-scroll "scrollend" the same way
+    // programmatic scrolls do in every browser — check for a clone
+    // landing shortly after release too.
+    clearTimeout(resetTimer.current);
+    resetTimer.current = setTimeout(settleIfOnClone, RESET_SETTLE_MS);
+  }
+
+  function onClickCapture(e) {
+    if (dragState.current.moved) {
+      e.preventDefault();
+      e.stopPropagation();
+      dragState.current.moved = false;
     }
   }
-
-  trackRef.current.scrollLeft = ds.startScroll - dx;
-}
-
-function onPointerUp() {
-  dragState.current.isDown = false;
-}
-
-function onClickCapture(e) {
-  if (dragState.current.moved) {
-    e.preventDefault();
-    e.stopPropagation();
-    dragState.current.moved = false;
-  }
-}
   function onTouchStart() {
     pauseAutoplay();
   }
@@ -345,7 +433,7 @@ function onClickCapture(e) {
           </div>
           <Reveal as="div" className="c-case__nav" index={2}>
             <span className="c-case__count">
-              <b>{String(activeIndex + 1).padStart(2, "0")}</b> / {String(cases.length).padStart(2, "0")}
+              <b>{String(activeIndex + 1).padStart(2, "0")}</b> / {String(REAL_LENGTH).padStart(2, "0")}
             </span>
             <div className="c-case__arrows">
               <button
@@ -353,7 +441,7 @@ function onClickCapture(e) {
                 className="c-case__arrow"
                 aria-label="Previous case study"
                 onClick={() => {
-                  scrollToCard((currentIndex() - 1 + cases.length) % cases.length);
+                  scrollToRendered(currentRenderedIndex() - 1);
                   pauseAutoplay();
                 }}
               >
@@ -364,7 +452,7 @@ function onClickCapture(e) {
                 className="c-case__arrow"
                 aria-label="Next case study"
                 onClick={() => {
-                  scrollToCard((currentIndex() + 1) % cases.length);
+                  scrollToRendered(currentRenderedIndex() + 1);
                   pauseAutoplay();
                 }}
               >
@@ -393,27 +481,45 @@ function onClickCapture(e) {
               }}
               onTouchStart={onTouchStart}
             >
-              {cases.map((c, i) => (
+              {renderedCases.map((c, i) => (
                 <article
                   className="c-case__card"
-                  key={c.name}
+                  key={c._key}
                   ref={(el) => (cardRefs.current[i] = el)}
+                  aria-hidden={i < FIRST_REAL || i > LAST_REAL ? "true" : undefined}
                 >
                   <p className="c-case__stat">{c.stat}</p>
                   <div className="c-case__logo">
-                    <span className="c-case__mark">{c.mark}</span>
+                    <span className="c-case__mark">
+                      {c.mark ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={c.mark} alt={`${c.name} logo`} />
+                      ) : (
+                        c.markText
+                      )}
+                    </span>
                     <div>
                       <b>{c.name}</b>
                       <span className="c-case__cat">{c.category}</span>
                     </div>
                   </div>
                   {c.external ? (
-                    <a className="c-case__btn" href={c.href} target="_blank" rel="noopener noreferrer">
+                    <a
+                      className="c-case__btn"
+                      href={c.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      tabIndex={i < FIRST_REAL || i > LAST_REAL ? -1 : undefined}
+                    >
                       {c.cta}
                       <ExternalArrowIcon />
                     </a>
                   ) : (
-                    <a className="c-case__btn" href={c.href}>
+                    <a
+                      className="c-case__btn"
+                      href={c.href}
+                      tabIndex={i < FIRST_REAL || i > LAST_REAL ? -1 : undefined}
+                    >
                       {c.cta}
                       <ExternalArrowIcon />
                     </a>
@@ -430,7 +536,7 @@ function onClickCapture(e) {
                 className={`c-case__dot${i === activeIndex ? " active" : ""}`}
                 aria-label={`Go to case study ${i + 1}`}
                 onClick={() => {
-                  scrollToCard(i);
+                  scrollToRendered(FIRST_REAL + i);
                   pauseAutoplay();
                 }}
               />

@@ -1,6 +1,6 @@
 ---
 title: "AppMatch AI: The AI-Powered Android App Finder for Smarter App Discovery"
-category: "Mobile Apps"
+category: "Mobile App Development"
 excerpt: "Discover Android apps using natural language with AppMatch AI. Find, compare, and evaluate apps based on features, pricing, offline support, ads, account requirements, and more."
 date: "September 4, 2026"
 readTime: "12 min read"

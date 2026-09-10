@@ -1,6 +1,6 @@
 ---
 title: "Castyra – TV Remote & Cast: Turn Your Android Phone Into a Smart TV Remote"
-category: "Mobile Apps"
+category: "Mobile App Development"
 excerpt: "Control compatible Fire TV, Android TV, and Roku devices from your Android phone. Castyra combines TV remote functionality, screen mirroring, and media casting in one convenient app."
 date: "September 4, 2026"
 readTime: "12 min read"

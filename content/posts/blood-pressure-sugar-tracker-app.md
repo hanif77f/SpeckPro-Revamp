@@ -1,6 +1,6 @@
 ---
 title: "Blood Pressure & Sugar Tracker App: Monitor Blood Pressure, Blood Sugar and Medications"
-category: "Mobile Apps"
+category: "Mobile App Development"
 excerpt: "Track blood pressure, blood sugar, BMI, medications, and health reports in one place with Blood Pressure & Sugar Tracker. Monitor trends, export reports, and stay organized with medication reminders."
 date: "September 9, 2026"
 readTime: "12 min read"

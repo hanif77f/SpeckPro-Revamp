@@ -42,7 +42,7 @@ const PROJECTS = [
     cat: "Mobile App Development",
     name: "AppMatch AI: App Finder",
     desc: "An AI-powered app finder that helps users discover and compare Android apps matched to their exact needs and preferences.",
-    href: "https://play.google.com/store/search?q=AppMatch%20AI%20App%20Finder&c=apps",
+    href: "https://play.google.com/store/apps/details?id=com.speckpro.search.appmatchai",
     mark: "/images/logos/12.png",
     cta: "View on Google Play",
   },
